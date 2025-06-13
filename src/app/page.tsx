@@ -64,18 +64,6 @@ export default function HomePage() {
           <p>
             {APP_CONFIG.DESCRIPTION}
           </p>
-
-          {/* 印刷ボタン */}
-          {results.length > 0 && (
-            <div className="mt-4 print-hide">
-              <button
-                onClick={() => window.print()}
-                className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md"
-              >
-                🖨️ 練習プリントを印刷
-              </button>
-            </div>
-          )}
         </header>
 
         {/* 部首選択 */}
@@ -86,6 +74,18 @@ export default function HomePage() {
             loading={loading}
           />
         </section>
+
+        {/* 印刷ボタン */}
+        {results.length > 0 && (
+          <section className="text-center mb-6 print-hide">
+            <button
+              onClick={() => window.print()}
+              className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md"
+            >
+              🖨️ 練習プリントを印刷
+            </button>
+          </section>
+        )}
 
         {/* 漢字一覧 */}
         <section className="bg-white rounded-lg shadow-sm p-6">
