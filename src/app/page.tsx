@@ -29,6 +29,17 @@ export default function HomePage() {
     }
   }, [selectedRadical]);
 
+  // 印刷時のURL表示用にCSS変数を設定
+  useEffect(() => {
+    // 現在のURLを取得（開発時は定数、本番は実際のURL）
+    const currentUrl = typeof window !== 'undefined'
+      ? window.location.origin
+      : APP_CONFIG.SITE_URL;
+
+    // CSS変数として設定
+    document.documentElement.style.setProperty('--print-site-url', `"${currentUrl}"`);
+  }, []);
+
   const handleRadicalSelect = (radical: RadicalType) => {
     if (selectedRadical === radical) {
       clearSearch(); // 同じ部首をクリックしたらクリア
@@ -56,7 +67,7 @@ export default function HomePage() {
 
           {/* 印刷ボタン */}
           {results.length > 0 && (
-            <div className="mt-4 no-print">
+            <div className="mt-4 print-hide">
               <button
                 onClick={() => window.print()}
                 className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md"

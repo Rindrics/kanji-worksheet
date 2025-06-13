@@ -76,11 +76,17 @@ body {
     display: none;
   }
 
-  header h1 {
-    writing-mode: vertical-rl;
-    text-orientation: upright;
-    font-size: 24pt;
-    margin-bottom: 20pt;
+  /* 印刷時のURL表示 */
+  body::before {
+    content: var(--print-site-url, "");
+    position: fixed;
+    bottom: 10pt;
+    right: 10pt;
+    font-size: 8pt;
+    color: #666;
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+    z-index: 1000;
   }
 
   /* 漢字表示の縦書き調整 */
