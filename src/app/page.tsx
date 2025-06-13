@@ -1,10 +1,12 @@
 'use client';
 
+import { useEffect } from 'react';
 import { RadicalSelector } from '@/components/kanji/RadicalSelector';
 import { KanjiGrid } from '@/components/kanji/KanjiGrid';
 import { useKanjiSearch } from '@/hooks/useKanjiSearch';
-import { RadicalType } from '@/data/mock-kanji';
+import { RadicalType, radicalInfo } from '@/data/mock-kanji';
 import { Kanji } from '@/types/kanji';
+import { APP_CONFIG } from '@/constants/app';
 
 export default function HomePage() {
   const {
@@ -14,6 +16,18 @@ export default function HomePage() {
     searchRadical,
     clearSearch
   } = useKanjiSearch();
+
+  // 選択された部首に応じてページタイトルを動的変更
+  useEffect(() => {
+    if (selectedRadical) {
+      const radicalData = radicalInfo.find(r => r.id === selectedRadical);
+      const groupName = radicalData?.description || `${selectedRadical}に関する漢字`;
+      const title = APP_CONFIG.PDF_FILENAME_TEMPLATE(groupName);
+      document.title = title;
+    } else {
+      document.title = APP_CONFIG.SERVICE_NAME;
+    }
+  }, [selectedRadical]);
 
   const handleRadicalSelect = (radical: RadicalType) => {
     if (selectedRadical === radical) {
@@ -34,10 +48,10 @@ export default function HomePage() {
         {/* ヘッダー */}
         <header className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-800 mb-2">
-            なかま漢字プリント
+            {APP_CONFIG.SERVICE_NAME}
           </h1>
           <p>
-            同じ部首・部品を持つ漢字で構成された漢字練習プリントを作れます
+            {APP_CONFIG.DESCRIPTION}
           </p>
 
           {/* 印刷ボタン */}
