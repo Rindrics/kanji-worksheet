@@ -1,35 +1,69 @@
 'use client';
 
-import { useState } from 'react';
-import { KanjiCard } from '@/components/kanji/KanjiCard';
-import { mockWaterKanji } from '@/data/mock-kanji';
+import { RadicalSelector } from '@/components/kanji/RadicalSelector';
+import { KanjiGrid } from '@/components/kanji/KanjiGrid';
+import { useKanjiSearch } from '@/hooks/useKanjiSearch';
+import { RadicalType } from '@/data/mock-kanji';
+import { Kanji } from '@/types/kanji';
 
 export default function HomePage() {
-  const [selectedKanji, setSelectedKanji] = useState(mockWaterKanji);
+  const {
+    results,
+    loading,
+    selectedRadical,
+    searchRadical,
+    clearSearch
+  } = useKanjiSearch();
+
+  const handleRadicalSelect = (radical: RadicalType) => {
+    if (selectedRadical === radical) {
+      clearSearch(); // 同じ部首をクリックしたらクリア
+    } else {
+      searchRadical(radical);
+    }
+  };
+
+  const handleKanjiClick = (kanji: Kanji) => {
+    console.log('選択された漢字:', kanji.character, kanji);
+    // 将来的に詳細表示や印刷選択に使用
+  };
 
   return (
-    <main className="container mx-auto p-4">
-      <h1 className="text-4xl font-bold text-center mb-8">
-        漢字練習プリントサービス
-      </h1>
+    <main className="min-h-screen bg-gray-50">
+      <div className="container mx-auto p-6">
+        {/* ヘッダー */}
+        <header className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-gray-800 mb-2">
+            なかま漢字プリント
+          </h1>
+          <p>
+            同じ部首・部品を持つ漢字で構成された漢字練習プリントを作れます
+          </p>
+        </header>
 
-      <div className="mb-6">
-        <button
-          className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
-          onClick={() => setSelectedKanji(mockWaterKanji)}
-        >
-          水編
-        </button>
-      </div>
-
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-        {selectedKanji.map(kanji => (
-          <KanjiCard
-            key={kanji.unicode}
-            kanji={kanji}
-            onClick={() => console.log('Selected:', kanji.character)}
+        {/* 部首選択 */}
+        <section className="bg-white rounded-lg shadow-sm p-6 mb-6">
+          <RadicalSelector
+            selectedRadical={selectedRadical}
+            onRadicalSelect={handleRadicalSelect}
+            loading={loading}
           />
-        ))}
+        </section>
+
+        {/* 漢字一覧 */}
+        <section className="bg-white rounded-lg shadow-sm p-6">
+          {loading ? (
+            <div className="text-center py-12">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto"></div>
+              <p className="mt-2 text-gray-500">検索中...</p>
+            </div>
+          ) : (
+            <KanjiGrid
+              kanjiList={results}
+              title={selectedRadical ? `${selectedRadical}に関係する漢字` : undefined}
+            />
+          )}
+        </section>
       </div>
     </main>
   );
