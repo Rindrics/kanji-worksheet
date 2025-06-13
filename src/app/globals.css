@@ -34,15 +34,39 @@ body {
   display: none;
 }
 
-/* 印刷時に非表示にするための汎用クラス */
-@media print {
-  .print-hide {
-    display: none !important;
-  }
+/* 書き順番号オーバーレイ用のスタイル（通常表示用） */
+.stroke-order-overlay {
+  pointer-events: none;
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
+}
+
+.stroke-order-overlay svg {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none !important;
+}
+
+.stroke-order-overlay text {
+  font-size: 12px;
+  fill: #333;
+  stroke: white;
+  stroke-width: 2px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  paint-order: stroke fill;
 }
 
 /* 印刷時専用の縦書きスタイル */
 @media print {
+  /* 印刷時に非表示にするための汎用クラス */
+  .print-hide, .no-print {
+    display: none !important;
+  }
+
   /* 通常表示を非表示、印刷専用を表示 */
   .screen-only {
     display: none;
@@ -87,13 +111,6 @@ body {
     writing-mode: horizontal-tb;
     text-orientation: mixed;
     z-index: 1000;
-  }
-
-  /* 漢字表示の縦書き調整 */
-  .kanji-character {
-    writing-mode: vertical-rl;
-    text-orientation: upright;
-    font-feature-settings: "vert" 1;
   }
 
   /* グリッドレイアウトの縦書き調整 */
@@ -143,12 +160,47 @@ body {
     grid-column: 2; grid-row: 2; /* 右下 */
   }
 
-  /* なぞり書き用の薄いグレー文字 */
+  /* 漢字表示の縦書き調整（統合済み） */
+  .kanji-character {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    font-feature-settings: "vert" 1;
+    font-size: 26pt;
+    line-height: 1;
+  }
+
+  /* なぞり書き用の薄いグレー文字（統合済み） */
   .kanji-card .text-gray-300 {
     color: #ddd !important;
     font-weight: 200;
     writing-mode: vertical-rl !important;
     text-orientation: upright !important;
+  }
+
+  /* 書き順番号オーバーレイ用のスタイル（印刷専用） */
+  .stroke-order-overlay {
+    pointer-events: none;
+    writing-mode: horizontal-tb !important;
+    text-orientation: mixed !important;
+  }
+
+  .stroke-order-overlay svg {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    pointer-events: none !important;
+  }
+
+  .stroke-order-overlay text {
+    font-size: 7pt !important;
+    fill: #333 !important;
+    stroke: white !important;
+    stroke-width: 1.5pt !important;
+    font-weight: bold !important;
+    font-family: Arial, sans-serif !important;
+    paint-order: stroke fill !important;
   }
 
   /* 練習用セクションの枠線 */
@@ -185,18 +237,6 @@ body {
     background-color: #f9fafb !important;
   }
 
-  /* 漢字文字のサイズ調整 */
-  .kanji-card .kanji-character {
-    font-size: 26pt;
-    font-feature-settings: "vert" 1;
-    line-height: 1;
-  }
-
-  /* 印刷時に非表示にするための汎用クラス（重複削除のため統合） */
-  .print-hide, .no-print {
-    display: none;
-  }
-
   /* 背景色やボックスシャドウを印刷時に削除 */
   * {
     background: transparent !important;
@@ -216,69 +256,4 @@ body {
   .print-break-inside-avoid {
     page-break-inside: avoid;
   }
-}
-
-/* 書き順番号オーバーレイ用のスタイル */
-.stroke-order-overlay {
-  pointer-events: none;
-  writing-mode: horizontal-tb !important;
-  text-orientation: mixed !important;
-}
-
-.stroke-order-overlay svg {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  pointer-events: none !important;
-}
-
-/* 書き順番号の調整（囲みなし黒文字） */
-.stroke-order-overlay text {
-  font-size: 7pt !important;
-  fill: #333 !important;
-  stroke: white !important;
-  stroke-width: 1.5pt !important;
-  font-weight: bold !important;
-  font-family: Arial, sans-serif !important;
-  paint-order: stroke fill !important;
-}
-
-/* 書き順表示用のスタイル（従来のものを更新） */
-.stroke-order-display {
-  writing-mode: horizontal-tb !important;
-  text-orientation: mixed !important;
-}
-
-.stroke-order-display svg {
-  width: 100% !important;
-  height: 100% !important;
-  max-width: none !important;
-  max-height: none !important;
-}
-
-.stroke-order-display text {
-  font-size: 8pt !important;
-  fill: #333 !important;
-  stroke: white !important;
-  stroke-width: 1.5pt !important;
-  font-weight: bold !important;
-  font-family: Arial, sans-serif !important;
-  paint-order: stroke fill !important;
-}
-
-/* ストロークの線 */
-.stroke-order-display path {
-  stroke: #ccc !important;
-  stroke-width: 1.5pt !important;
-  fill: none !important;
-}
-
-/* なぞり書き用の薄いグレー文字 */
-.kanji-card .text-gray-300 {
-  color: #ddd !important;
-  font-weight: 200;
-  writing-mode: vertical-rl !important;
-  text-orientation: upright !important;
 }
