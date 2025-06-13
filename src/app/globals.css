@@ -25,8 +25,26 @@ body {
   font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "BIZ UDPGothic", "Meiryo", sans-serif;
 }
 
+/* 通常表示専用のスタイル */
+.screen-only {
+  display: block;
+}
+
+.print-only {
+  display: none;
+}
+
 /* 印刷時専用の縦書きスタイル */
 @media print {
+  /* 通常表示を非表示、印刷専用を表示 */
+  .screen-only {
+    display: none;
+  }
+
+  .print-only {
+    display: grid;
+  }
+
   /* 基本レイアウトを縦書きに */
   body {
     writing-mode: vertical-rl;
@@ -64,7 +82,6 @@ body {
   .kanji-character {
     writing-mode: vertical-rl;
     text-orientation: upright;
-    font-size: 48pt;
     font-feature-settings: "vert" 1;
   }
 
@@ -73,7 +90,7 @@ body {
     writing-mode: vertical-rl;
     text-orientation: upright;
     display: block;
-    columns: 8;
+    columns: 6;
     column-gap: 20pt;
     column-fill: auto;
   }
@@ -83,13 +100,88 @@ body {
     writing-mode: vertical-rl;
     text-orientation: upright;
     break-inside: avoid;
-    margin-bottom: 10pt;
-    padding: 8pt;
-    border: 1pt solid #ccc;
+    margin-bottom: 15pt;
+    padding: 4pt;
+    border: 1pt solid #333;
     display: inline-block;
-    width: auto;
-    height: 60pt;
-    text-align: center;
+    width: 80pt;
+    height: 80pt;
+    background: white !important;
+  }
+
+  /* 2x2グリッド内の各セクション */
+  .kanji-card .print-only {
+    writing-mode: horizontal-tb !important;
+    text-orientation: mixed !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 2pt;
+    height: 100%;
+    width: 100%;
+  }
+
+  /* グリッド内のセルの配置を明示的に指定 */
+  .kanji-card .print-only > div:nth-child(1) {
+    grid-column: 1; grid-row: 1; /* 左上 */
+  }
+  .kanji-card .print-only > div:nth-child(2) {
+    grid-column: 2; grid-row: 1; /* 右上 */
+  }
+  .kanji-card .print-only > div:nth-child(3) {
+    grid-column: 1; grid-row: 2; /* 左下 */
+  }
+  .kanji-card .print-only > div:nth-child(4) {
+    grid-column: 2; grid-row: 2; /* 右下 */
+  }
+
+  /* なぞり書き用の薄いグレー文字 */
+  .kanji-card .text-gray-300 {
+    color: #ddd !important;
+    font-weight: 200;
+    writing-mode: vertical-rl !important;
+    text-orientation: upright !important;
+  }
+
+  /* 練習用セクションの枠線 */
+  .kanji-card .border {
+    border: 0.5pt solid #666 !important;
+    position: relative;
+  }
+
+  /* 各マスに破線の十字ガイドライン（字のバランス用） */
+  .kanji-card .border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    right: 0;
+    bottom: 0;
+    border-left: 0.3pt dashed #ccc;
+    pointer-events: none;
+  }
+
+  .kanji-card .border::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-top: 0.3pt dashed #ccc;
+    pointer-events: none;
+  }
+
+  /* 背景色の調整 */
+  .kanji-card .bg-gray-50 {
+    background-color: #f9fafb !important;
+  }
+
+  /* 漢字文字のサイズ調整 */
+  .kanji-card .kanji-character {
+    font-size: 26pt;
+    font-feature-settings: "vert" 1;
+    line-height: 1;
   }
 
   /* 部首選択エリアは印刷時は非表示 */

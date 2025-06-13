@@ -39,6 +39,21 @@ export default function HomePage() {
           <p>
             同じ部首・部品を持つ漢字で構成された漢字練習プリントを作れます
           </p>
+
+          {/* 印刷ボタン */}
+          {results.length > 0 && (
+            <div className="mt-4 no-print">
+              <button
+                onClick={() => window.print()}
+                className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md"
+              >
+                🖨️ 練習プリントを印刷
+              </button>
+              <p className="text-sm text-gray-500 mt-2">
+                印刷すると2×2の練習マス目になります
+              </p>
+            </div>
+          )}
         </header>
 
         {/* 部首選択 */}
