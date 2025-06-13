@@ -7,8 +7,8 @@ interface KanjiCardProps {
 
 export function KanjiCard({ kanji }: KanjiCardProps) {
   return (
-    <Card className="text-center">
-      <div className="text-4xl mb-2">{kanji.character}</div>
+    <Card className="text-center kanji-card print-break-inside-avoid">
+      <div className="text-4xl mb-2 kanji-character">{kanji.character}</div>
     </Card>
   );
 }

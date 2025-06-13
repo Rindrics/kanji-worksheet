@@ -11,7 +11,7 @@ export function RadicalSelector({ selectedRadical, onRadicalSelect, loading = fa
   const stats = getKanjiStats();
 
   return (
-    <div className="mb-6">
+    <div className="mb-6 radical-selector">
       <h2 className="text-xl font-semibold mb-4">グループを選択</h2>
 
       <div className="flex flex-wrap gap-3">

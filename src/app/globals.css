@@ -22,5 +22,103 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "BIZ UDPGothic", "Meiryo", sans-serif;
+}
+
+/* 印刷時専用の縦書きスタイル */
+@media print {
+  /* 基本レイアウトを縦書きに */
+  body {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 14pt;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20pt;
+  }
+
+  /* メインコンテナ */
+  main {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    height: 100vh;
+    width: 100%;
+    overflow: visible;
+  }
+
+  /* ヘッダーの縦書き調整 */
+  header {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    margin-bottom: 30pt;
+  }
+
+  header h1 {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    font-size: 24pt;
+    margin-bottom: 20pt;
+  }
+
+  /* 漢字表示の縦書き調整 */
+  .kanji-character {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    font-size: 48pt;
+    font-feature-settings: "vert" 1;
+  }
+
+  /* グリッドレイアウトの縦書き調整 */
+  .grid {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    display: block;
+    columns: 8;
+    column-gap: 20pt;
+    column-fill: auto;
+  }
+
+  /* カード要素の調整 */
+  .kanji-card {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    break-inside: avoid;
+    margin-bottom: 10pt;
+    padding: 8pt;
+    border: 1pt solid #ccc;
+    display: inline-block;
+    width: auto;
+    height: 60pt;
+    text-align: center;
+  }
+
+  /* 部首選択エリアは印刷時は非表示 */
+  .radical-selector {
+    display: none;
+  }
+
+  /* 不要な要素を印刷時に非表示 */
+  .no-print {
+    display: none;
+  }
+
+  /* 背景色やボックスシャドウを印刷時に削除 */
+  * {
+    background: transparent !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* 改ページ制御 */
+  .print-break-before {
+    page-break-before: always;
+  }
+
+  .print-break-after {
+    page-break-after: always;
+  }
+
+  .print-break-inside-avoid {
+    page-break-inside: avoid;
+  }
 }
