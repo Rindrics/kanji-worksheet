@@ -46,7 +46,7 @@ export function KanjiGrid({ kanjiList, title, loading = false }: KanjiGridProps)
       
       {/* 追加情報 */}
       {kanjiList.length > 0 && (
-        <div className="mt-6 p-3 bg-gray-50 rounded-lg">
+        <div className="mt-6 p-3 bg-gray-50 rounded-lg print-hide">
           <div className="flex items-center justify-between text-xs text-gray-600">
             <span>
               画数範囲: {Math.min(...kanjiList.map(k => k.strokeCount))} - {Math.max(...kanjiList.map(k => k.strokeCount))}画

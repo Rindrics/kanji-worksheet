@@ -63,9 +63,6 @@ export default function HomePage() {
               >
                 🖨️ 練習プリントを印刷
               </button>
-              <p className="text-sm text-gray-500 mt-2">
-                印刷すると2×2の練習マス目になります
-              </p>
             </div>
           )}
         </header>

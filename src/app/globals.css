@@ -34,6 +34,13 @@ body {
   display: none;
 }
 
+/* 印刷時に非表示にするための汎用クラス */
+@media print {
+  .print-hide {
+    display: none !important;
+  }
+}
+
 /* 印刷時専用の縦書きスタイル */
 @media print {
   /* 通常表示を非表示、印刷専用を表示 */
@@ -64,11 +71,9 @@ body {
     overflow: visible;
   }
 
-  /* ヘッダーの縦書き調整 */
+  /* ヘッダー要素のみを非表示 */
   header {
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    margin-bottom: 30pt;
+    display: none;
   }
 
   header h1 {
@@ -181,13 +186,8 @@ body {
     line-height: 1;
   }
 
-  /* 部首選択エリアは印刷時は非表示 */
-  .radical-selector {
-    display: none;
-  }
-
-  /* 不要な要素を印刷時に非表示 */
-  .no-print {
+  /* 印刷時に非表示にするための汎用クラス（重複削除のため統合） */
+  .print-hide, .no-print {
     display: none;
   }
 
