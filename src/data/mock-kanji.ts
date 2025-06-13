@@ -146,14 +146,14 @@ export type RadicalType = keyof typeof radicalSearchPatterns;
 export const radicalInfo = [
   {
     id: '水' as RadicalType,
-    name: '水へん',
-    description: '水に関する漢字',
+    name: '水・さんずい',
+    description: '水に関係する漢字',
     variants: ['水', '氵'],
   },
   {
     id: '火' as RadicalType,
-    name: '火へん',
-    description: '火に関する漢字',
+    name: '火へん・れっか',
+    description: '火に関係する漢字',
     variants: ['火', '灬'],
   },
 ];

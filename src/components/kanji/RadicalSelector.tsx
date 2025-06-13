@@ -16,8 +16,6 @@ export function RadicalSelector({ selectedRadical, onRadicalSelect, loading = fa
 
       <div className="flex flex-wrap gap-3">
         {radicalInfo.map(radical => {
-          const count = stats.radicalCounts.find(r => r.radical === radical.id)?.count || 0;
-
           return (
             <button
               key={radical.id}
@@ -32,27 +30,15 @@ export function RadicalSelector({ selectedRadical, onRadicalSelect, loading = fa
               `}
             >
               <div className="flex items-center space-x-2">
-                <div className="text-2xl">{radical.id}</div>
+                <div className="text-2xl">{radical.variants}</div>
                 <div className="text-left">
-                  <div className="font-medium">{radical.name}</div>
-                  <div className="text-xs opacity-75">{count}文字</div>
+                  <div className="text-xs">{radical.name}</div>
                 </div>
               </div>
             </button>
           );
         })}
       </div>
-
-      {selectedRadical && (
-        <div className="mt-3 p-3 bg-blue-50 rounded-lg">
-          <p className="text-sm text-blue-700">
-            <span className="font-medium">{selectedRadical}編</span>の漢字を表示中
-            <span className="ml-2">
-              (検索パターン: {radicalInfo.find(r => r.id === selectedRadical)?.variants.join(', ')})
-            </span>
-          </p>
-        </div>
-      )}
     </div>
   );
 }
