@@ -32,10 +32,6 @@ export function KanjiGrid({ kanjiList, title, loading = false }: KanjiGridProps)
       {title && (
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
-          <div className="flex items-center space-x-4 text-sm text-gray-500">
-            <span>{kanjiList.length}文字</span>
-            <span>画数順</span>
-          </div>
         </div>
       )}
       
