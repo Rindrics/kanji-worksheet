@@ -82,7 +82,7 @@ export default function HomePage() {
               onClick={() => window.print()}
               className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md"
             >
-              🖨️ 練習プリントを印刷
+              🖨️ ワークシートを印刷
             </button>
           </section>
         )}
