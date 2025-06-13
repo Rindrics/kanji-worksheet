@@ -214,3 +214,68 @@ body {
     page-break-inside: avoid;
   }
 }
+
+/* 書き順番号オーバーレイ用のスタイル */
+.stroke-order-overlay {
+  pointer-events: none;
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
+}
+
+.stroke-order-overlay svg {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none !important;
+}
+
+/* 書き順番号の調整（囲みなし黒文字） */
+.stroke-order-overlay text {
+  font-size: 7pt !important;
+  fill: #333 !important;
+  stroke: white !important;
+  stroke-width: 1.5pt !important;
+  font-weight: bold !important;
+  font-family: Arial, sans-serif !important;
+  paint-order: stroke fill !important;
+}
+
+/* 書き順表示用のスタイル（従来のものを更新） */
+.stroke-order-display {
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
+}
+
+.stroke-order-display svg {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+}
+
+.stroke-order-display text {
+  font-size: 8pt !important;
+  fill: #333 !important;
+  stroke: white !important;
+  stroke-width: 1.5pt !important;
+  font-weight: bold !important;
+  font-family: Arial, sans-serif !important;
+  paint-order: stroke fill !important;
+}
+
+/* ストロークの線 */
+.stroke-order-display path {
+  stroke: #ccc !important;
+  stroke-width: 1.5pt !important;
+  fill: none !important;
+}
+
+/* なぞり書き用の薄いグレー文字 */
+.kanji-card .text-gray-300 {
+  color: #ddd !important;
+  font-weight: 200;
+  writing-mode: vertical-rl !important;
+  text-orientation: upright !important;
+}
