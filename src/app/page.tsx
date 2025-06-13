@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { RadicalSelector } from '@/components/kanji/RadicalSelector';
 import { KanjiGrid } from '@/components/kanji/KanjiGrid';
 import { useKanjiSearch } from '@/hooks/useKanjiSearch';
-import { RadicalType, radicalInfo } from '@/data/mock-kanji';
+import { type RadicalType, radicalInfo } from '@/data/kanji';
 import { Kanji } from '@/types/kanji';
 import { APP_CONFIG } from '@/constants/app';
 

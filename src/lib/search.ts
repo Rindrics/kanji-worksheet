@@ -1,53 +1,32 @@
-import { Kanji } from '@/types/kanji';
-import { mockKanji, radicalSearchPatterns, RadicalType, radicalInfo } from '@/data/mock-kanji';
+import { allKanji, radicalSearchPatterns, getKanjiStats, searchKanjiByRadical, type RadicalType } from '@/data/kanji';
+import type { Kanji } from '@/types/kanji';
 
+// 統計情報を取得（キャッシュ済み）
+export { getKanjiStats };
+
+// 部首による検索
 export function searchByRadical(radical: RadicalType): Kanji[] {
-  const searchPatterns = radicalSearchPatterns[radical];
-
-  const results = mockKanji.filter(kanji =>
-    searchPatterns.some(pattern =>
-      kanji.radicals.includes(pattern)
-    )
-  );
-
-  return results.sort((a, b) => a.strokeCount - b.strokeCount);
+  return searchKanjiByRadical(radical);
 }
 
-export function searchByCharacter(query: string): Kanji[] {
-  if (!query.trim()) return [];
-
-  return mockKanji.filter(kanji =>
-    kanji.character.includes(query) ||
-    kanji.radicals.some(radical => radical.includes(query))
-  );
-}
-
-export function searchByStrokeCount(min: number, max?: number): Kanji[] {
-  return mockKanji.filter(kanji => {
-    if (max !== undefined) {
-      return kanji.strokeCount >= min && kanji.strokeCount <= max;
-    }
-    return kanji.strokeCount === min;
-  }).sort((a, b) => a.strokeCount - b.strokeCount);
-}
-
+// 全ての漢字を取得
 export function getAllKanji(): Kanji[] {
-  return mockKanji.sort((a, b) => a.strokeCount - b.strokeCount);
+  return allKanji;
 }
 
-export function getKanjiStats() {
-  const radicalCounts = radicalInfo.map(info => ({
-    radical: info.id,
-    name: info.name,
-    count: searchByRadical(info.id).length,
-  }));
+// 特定の漢字を検索
+export function findKanjiByCharacter(character: string): Kanji | undefined {
+  return allKanji.find(kanji => kanji.character === character);
+}
 
-  return {
-    totalKanji: mockKanji.length,
-    radicalCounts,
-    strokeRange: {
-      min: Math.min(...mockKanji.map(k => k.strokeCount)),
-      max: Math.max(...mockKanji.map(k => k.strokeCount)),
-    }
-  };
+// 画数による検索
+export function searchByStrokeCount(min: number, max: number): Kanji[] {
+  return allKanji.filter(kanji => 
+    kanji.strokeCount >= min && kanji.strokeCount <= max
+  ).sort((a, b) => a.strokeCount - b.strokeCount);
+}
+
+// 部首のバリエーション検索
+export function getRadicalVariants(radical: RadicalType): string[] {
+  return radicalSearchPatterns[radical] || [];
 }

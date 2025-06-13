@@ -136,24 +136,4 @@ export const mockKanji: Kanji[] = [
   }
 ];
 
-export const radicalSearchPatterns = {
-  '水': ['水', '氵'],
-  '火': ['火', '灬'],
-} as const;
-
-export type RadicalType = keyof typeof radicalSearchPatterns;
-
-export const radicalInfo = [
-  {
-    id: '水' as RadicalType,
-    name: '水・さんずい',
-    description: '水に関係する漢字',
-    variants: ['水', '氵'],
-  },
-  {
-    id: '火' as RadicalType,
-    name: '火へん・れっか',
-    description: '火に関係する漢字',
-    variants: ['火', '灬'],
-  },
-];
+// 部首情報は /src/config/radicals.js で一元管理

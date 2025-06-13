@@ -1,68 +1,43 @@
-import { useState, useCallback } from 'react';
-import { Kanji } from '@/types/kanji';
-import { RadicalType } from '@/data/mock-kanji';
-import { searchByRadical, searchByCharacter, getAllKanji } from '@/lib/search';
+import { useState } from 'react';
+import { searchByRadical } from '@/lib/search';
+import { type RadicalType } from '@/data/kanji';
+import type { Kanji } from '@/types/kanji';
 
 export function useKanjiSearch() {
   const [results, setResults] = useState<Kanji[]>([]);
   const [loading, setLoading] = useState(false);
   const [selectedRadical, setSelectedRadical] = useState<RadicalType | null>(null);
 
-  const searchRadical = useCallback((radical: RadicalType) => {
+  const searchRadical = async (radical: RadicalType) => {
     setLoading(true);
+    setSelectedRadical(radical);
+    
     try {
-      const searchResults = searchByRadical(radical);
-      setResults(searchResults);
-      setSelectedRadical(radical);
+      // 実際の環境では非同期処理（API呼び出し等）になる可能性があるため
+      // setTimeoutで非同期処理をシミュレート
+      setTimeout(() => {
+        const searchResults = searchByRadical(radical);
+        setResults(searchResults);
+        setLoading(false);
+      }, 300); // UXのため少し遅延を入れる
     } catch (error) {
-      console.error('部首検索エラー:', error);
+      console.error('検索中にエラーが発生しました:', error);
       setResults([]);
-    } finally {
       setLoading(false);
     }
-  }, []);
+  };
 
-  const searchCharacter = useCallback((query: string) => {
-    setLoading(true);
-    try {
-      const searchResults = searchByCharacter(query);
-      setResults(searchResults);
-      setSelectedRadical(null);
-    } catch (error) {
-      console.error('文字検索エラー:', error);
-      setResults([]);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  const clearSearch = useCallback(() => {
+  const clearSearch = () => {
     setResults([]);
     setSelectedRadical(null);
     setLoading(false);
-  }, []);
-
-  const showAll = useCallback(() => {
-    setLoading(true);
-    try {
-      const allKanji = getAllKanji();
-      setResults(allKanji);
-      setSelectedRadical(null);
-    } catch (error) {
-      console.error('全漢字取得エラー:', error);
-      setResults([]);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  };
 
   return {
     results,
     loading,
     selectedRadical,
     searchRadical,
-    searchCharacter,
     clearSearch,
-    showAll,
   };
 }

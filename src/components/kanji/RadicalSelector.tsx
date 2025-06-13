@@ -1,4 +1,4 @@
-import { RadicalType, radicalInfo } from '@/data/mock-kanji';
+import { type RadicalType, radicalInfo } from '@/data/kanji';
 import { getKanjiStats } from '@/lib/search';
 
 interface RadicalSelectorProps {
