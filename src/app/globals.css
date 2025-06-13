@@ -90,9 +90,6 @@ body {
     writing-mode: vertical-rl;
     text-orientation: upright;
     display: block;
-    columns: 6;
-    column-gap: 20pt;
-    column-fill: auto;
   }
 
   /* カード要素の調整 */
