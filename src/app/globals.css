@@ -113,6 +113,16 @@ body {
   width: 100%;
 }
 
+.print-mode-enabled .print-mode-view .kanji-svg-container {
+  writing-mode: horizontal-tb;
+  text-orientation: mixed;
+}
+
+.print-mode-enabled .print-mode-view .kanji-svg-container svg {
+  writing-mode: horizontal-tb;
+  text-orientation: mixed;
+}
+
 .print-mode-enabled .print-mode-view .kanji-character {
   writing-mode: vertical-rl;
   text-orientation: upright;
@@ -279,6 +289,18 @@ body {
   }
 
   /* 漢字表示の縦書き調整（統合済み） */
+  /* SVG漢字表示の調整 */
+  .kanji-svg-container {
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+  }
+
+  .kanji-svg-container svg {
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+  }
+
+  /* フォールバック用の文字表示 */
   .kanji-character {
     writing-mode: vertical-rl;
     text-orientation: upright;
