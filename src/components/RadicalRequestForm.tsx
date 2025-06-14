@@ -32,7 +32,7 @@ export default function RadicalRequestForm() {
   // 入力文字列を部首名の配列に分割する関数
   const parseRadicalNames = (input: string): string[] => {
     // 区切り文字：読点、全角・半角スペース、カンマ
-    const separators = /[、,，\s　]+/;
+    const separators = /[、,，\s　・]+/;
     return input
       .split(separators)
       .map(name => name.trim())
