@@ -2,6 +2,7 @@
 
 import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 import { RadicalSelector } from '@/components/kanji/RadicalSelector';
 import { KanjiGrid } from '@/components/kanji/KanjiGrid';
 import { useKanjiSearch } from '@/hooks/useKanjiSearch';
@@ -224,6 +225,21 @@ function HomePageContent() {
             onRadicalSelect={handleRadicalSelect}
             loading={loading}
           />
+
+          {/* 新しいグループ追加リクエストへの導線 */}
+          <div className="mt-6 pt-6 border-t border-gray-200 print-hide">
+            <div className="text-center">
+              <p className="text-sm text-gray-600 mb-3">
+                探している部首グループが見つからない場合
+              </p>
+              <Link
+                href="/request-radical"
+                className="inline-flex items-center px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors shadow-sm"
+              >
+                📝 新しいグループを追加リクエスト
+              </Link>
+            </div>
+          </div>
         </section>
 
         {/* 印刷ボタン */}

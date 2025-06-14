@@ -42,3 +42,4 @@ next-env.d.ts
 
 kanjivg-cache
 generated-kanji.ts
+.env*.local
