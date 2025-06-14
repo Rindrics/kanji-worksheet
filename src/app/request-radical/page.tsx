@@ -9,11 +9,8 @@ export default function RequestRadicalPage() {
         {/* ヘッダー */}
         <header className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-800 mb-2">
-            新しいグループの追加リクエスト
+            部首・部品グループの追加依頼
           </h1>
-          <p className="text-gray-600 mb-4">
-            {APP_CONFIG.SERVICE_NAME}に新しい部首グループを追加するリクエストを送信できます
-          </p>
           <Link
             href="/"
             className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors"

@@ -133,10 +133,6 @@ export default function RadicalRequestForm() {
                 <label className="block text-lg font-medium text-gray-700 mb-3">
                     追加してほしい部首・部品名
                 </label>
-                <p className="text-sm text-gray-600 mb-4">
-                    複数の部首・部品名を入力する場合は、読点（、）やカンマ（,）、スペースで区切ってください。<br/>
-                    既に存在する部首・部品名は個別にエラーが表示されます。
-                </p>
                 <input
                   type="text"
                   value={formData.radicalName}

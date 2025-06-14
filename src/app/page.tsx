@@ -236,7 +236,7 @@ function HomePageContent() {
                 href="/request-radical"
                 className="inline-flex items-center px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-green-600 transition-colors shadow-sm"
               >
-                📝 新しいグループを追加リクエスト
+                📝 グループの追加を依頼する
               </Link>
             </div>
           </div>
