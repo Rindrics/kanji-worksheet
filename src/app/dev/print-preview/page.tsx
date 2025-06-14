@@ -158,13 +158,10 @@ export default function PrintPreviewPage() {
       }
 
       .print-preview-mode .stroke-order-overlay text {
-        font-size: 6pt !important;
+        font-size: 7pt !important;
         fill: #333 !important;
-        stroke: white !important;
-        stroke-width: 1.5pt !important;
         font-weight: bold !important;
         font-family: Arial, sans-serif !important;
-        paint-order: stroke fill !important;
       }
 
       /* グリッドレイアウト最適化 */

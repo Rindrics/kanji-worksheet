@@ -51,13 +51,10 @@ body {
 }
 
 .stroke-order-overlay text {
-  font-size: 12px;
+  font-size: 10px;
   fill: #333;
-  stroke: white;
-  stroke-width: 2px;
   font-weight: bold;
   font-family: Arial, sans-serif;
-  paint-order: stroke fill;
 }
 
 /* 印刷時専用の縦書きスタイル */
@@ -196,11 +193,8 @@ body {
   .stroke-order-overlay text {
     font-size: 7pt !important;
     fill: #333 !important;
-    stroke: white !important;
-    stroke-width: 1.5pt !important;
     font-weight: bold !important;
     font-family: Arial, sans-serif !important;
-    paint-order: stroke fill !important;
   }
 
   /* 練習用セクションの枠線 */
