@@ -50,7 +50,7 @@ export function StrokeOrderDisplay({ kanji, className = '' }: StrokeOrderDisplay
 
               {/* 方向矢印（画の長さに応じた長さ） */}
               {direction && (
-                <g transform={`translate(${x + 15}, ${y}) rotate(${direction.angle})`}>
+                <g transform={`translate(${x + 2}, ${y + 4}) rotate(${direction.angle})`}>
                   <path
                     d={`M${-direction.length/2},0 L${direction.length/2},0 M${direction.length/2},0 L${direction.length/2-3},-2 M${direction.length/2},0 L${direction.length/2-3},2`}
                     stroke="#000"
