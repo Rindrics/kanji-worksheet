@@ -281,7 +281,7 @@ function HomePageContent() {
           ) : (
             <KanjiGrid
               kanjiList={results}
-              title={selectedRadical ? `${selectedRadical}に関係する漢字` : undefined}
+              title={selectedRadical ? `${selectedRadical}に関係する漢字（${results.length}個）` : undefined}
             />
           )}
         </section>
