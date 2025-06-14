@@ -1,6 +1,5 @@
 import RadicalRequestForm from '@/components/RadicalRequestForm';
 import Link from 'next/link';
-import { APP_CONFIG } from '@/constants/app';
 
 export default function RequestRadicalPage() {
   return (
