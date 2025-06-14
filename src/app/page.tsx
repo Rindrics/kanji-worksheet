@@ -17,8 +17,10 @@ function HomePageContent() {
   const {
     results,
     loading,
+    searchType,
     selectedRadical,
     searchRadical,
+    searchHannyashingyo,
     clearSearch
   } = useKanjiSearch();
 
@@ -48,9 +50,12 @@ function HomePageContent() {
     }
   }, [searchParams, selectedRadical, searchRadical]);
 
-  // 選択された部首に応じてページタイトルを動的変更
+  // 選択された検索タイプに応じてページタイトルを動的変更
   useEffect(() => {
-    if (selectedRadical) {
+    if (searchType === 'hannyashingyo') {
+      const title = APP_CONFIG.PDF_FILENAME_TEMPLATE('般若心経');
+      document.title = title;
+    } else if (selectedRadical) {
       const radicalData = radicalInfo.find(r => r.id === selectedRadical);
       const groupName = radicalData?.description || `${selectedRadical}に関する漢字`;
       const title = APP_CONFIG.PDF_FILENAME_TEMPLATE(groupName);
@@ -58,7 +63,7 @@ function HomePageContent() {
     } else {
       document.title = APP_CONFIG.SERVICE_NAME;
     }
-  }, [selectedRadical]);
+  }, [searchType, selectedRadical]);
 
 
 
@@ -213,28 +218,64 @@ function HomePageContent() {
           </p>
         </header>
 
-        {/* 部首選択 */}
+        {/* 検索方法選択 */}
         <section className="bg-white rounded-lg shadow-sm p-6 mb-6">
-          <RadicalSelector
-            selectedRadical={selectedRadical}
-            onRadicalSelect={handleRadicalSelect}
-            loading={loading}
-          />
-
-          {/* 新しいグループ追加リクエストへの導線 */}
-          <div className="mt-6 pt-6 border-t border-gray-200 print-hide">
+          {/* 般若心経ボタン */}
+          <div className="mb-6">
             <div className="text-center">
-              <p className="text-sm text-gray-600 mb-3">
-                探している部首・部品グループが見つからない場合
-              </p>
-              <Link
-                href="/request-radical"
-                className="inline-flex items-center px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-green-600 transition-colors shadow-sm"
-              >
-                📝 グループの追加を依頼する
-              </Link>
+              <h2 className="text-lg font-semibold text-gray-800 mb-4">学習テーマを選択</h2>
+              <div className="flex justify-center space-x-4">
+                <button
+                  onClick={clearSearch}
+                  disabled={loading}
+                  className={`px-6 py-3 rounded-lg transition-colors shadow-sm ${
+                    searchType === 'radical'
+                      ? 'bg-blue-500 text-white'
+                      : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
+                  } ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                >
+                  🧵 部首別
+                </button>
+                <button
+                  onClick={searchHannyashingyo}
+                  disabled={loading}
+                  className={`px-6 py-3 rounded-lg transition-colors shadow-sm ${
+                    searchType === 'hannyashingyo'
+                      ? 'bg-purple-500 text-white'
+                      : 'bg-purple-100 text-purple-700 hover:bg-purple-200'
+                  } ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                >
+                  📿 般若心経
+                </button>
+              </div>
             </div>
           </div>
+
+          {/* 部首選択（部首モードの時のみ表示） */}
+          {searchType === 'radical' && (
+            <>
+              <RadicalSelector
+                selectedRadical={selectedRadical}
+                onRadicalSelect={handleRadicalSelect}
+                loading={loading}
+              />
+
+              {/* 新しいグループ追加リクエストへの導線 */}
+              <div className="mt-6 pt-6 border-t border-gray-200 print-hide">
+                <div className="text-center">
+                  <p className="text-sm text-gray-600 mb-3">
+                    探している部首・部品グループが見つからない場合
+                  </p>
+                  <Link
+                    href="/request-radical"
+                    className="inline-flex items-center px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-green-600 transition-colors shadow-sm"
+                  >
+                    📝 グループの追加を依頼する
+                  </Link>
+                </div>
+              </div>
+            </>
+          )}
         </section>
 
         {/* 印刷ボタン */}
@@ -272,7 +313,13 @@ function HomePageContent() {
           ) : (
             <KanjiGrid
               kanjiList={results}
-              title={selectedRadical ? `${selectedRadical}に関係する漢字（${results.length}個）` : undefined}
+              title={
+                searchType === 'hannyashingyo'
+                  ? `般若心経の漢字（${results.length}文字）`
+                  : selectedRadical
+                  ? `${selectedRadical}に関係する漢字（${results.length}個）`
+                  : undefined
+              }
             />
           )}
         </section>
