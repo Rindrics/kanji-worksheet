@@ -78,6 +78,11 @@ async function updateRadicalConfig(octokit: any, radicalName: string) {
 
   const existingContent = Buffer.from(existingFile.content, 'base64').toString('utf-8');
 
+  // 重複チェック
+  if (checkIfRadicalExists(existingContent, radicalName)) {
+    throw new Error(`部首「${radicalName}」は既に存在します。どうぞご利用ください。`);
+  }
+
   // 新しい部首を追加する処理
   const newContent = addRadicalToConfig(existingContent, radicalName);
 
@@ -113,6 +118,24 @@ function addRadicalToConfig(existingContent: string, radicalName: string): strin
   });
 
   return updatedContent;
+}
+
+// 部首が既に存在するかチェック（radicalInfo配列のidとの重複をチェック）
+function checkIfRadicalExists(fileContent: string, radicalName: string): boolean {
+  // radicalInfo配列内でidとの重複をチェック
+  const radicalInfoRegex = /export const radicalInfo: RadicalInfo\[\] = \[([\s\S]*?)\];/;
+  const match = fileContent.match(radicalInfoRegex);
+
+  if (!match) {
+    return false;
+  }
+
+  const radicalInfoContent = match[1];
+
+  // id: '部首名' as RadicalType の形式をチェック
+  const idRegex = new RegExp(`id:\\s*['"']${radicalName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}['"']\\s*as RadicalType`);
+
+  return idRegex.test(radicalInfoContent);
 }
 
 // PRのタイトルと説明を生成
@@ -217,7 +240,9 @@ export async function POST(request: NextRequest) {
 
     let errorMessage = 'PR作成に失敗しました';
     if (error instanceof Error) {
-      if (error.message.includes('GitHub App認証')) {
+      if (error.message.includes('は既に存在します')) {
+        errorMessage = error.message; // 重複エラーはそのまま表示
+      } else if (error.message.includes('GitHub App認証')) {
         errorMessage = 'GitHub App認証の設定に問題があります';
       } else if (error.message.includes('Not Found')) {
         errorMessage = 'リポジトリが見つかりません';

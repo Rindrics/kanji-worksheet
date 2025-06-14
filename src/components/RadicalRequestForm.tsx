@@ -80,7 +80,7 @@ export default function RadicalRequestForm() {
 
           if (!response.ok) {
             const error = await response.json();
-            throw new Error(error.message || 'エラーが発生しました');
+            throw new Error(error.error || 'エラーが発生しました');
           }
 
           const result = await response.json();
@@ -99,8 +99,15 @@ export default function RadicalRequestForm() {
       if (results.failed.length === 0) {
         setSubmitStatus('success');
       } else if (results.success.length === 0) {
+        // 全て失敗した場合
         setSubmitStatus('error');
-        setErrorMessage('PR 作成に失敗しました');
+        if (results.failed.length === 1) {
+          // 単一の失敗の場合は、そのエラーメッセージを表示
+          setErrorMessage(results.failed[0].error);
+        } else {
+          // 複数の失敗の場合は、要約メッセージを表示
+          setErrorMessage(`${results.failed.length}個の部首・部品名でエラーが発生しました。詳細は下記をご確認ください。`);
+        }
       } else {
         setSubmitStatus('success'); // 一部成功した場合も成功扱い
       }
@@ -126,7 +133,8 @@ export default function RadicalRequestForm() {
                     追加してほしい部首・部品名
                 </label>
                 <p className="text-sm text-gray-600 mb-4">
-                    複数の部首・部品名を入力する場合は、読点（、）やカンマ（,）、スペースで区切ってください
+                    複数の部首・部品名を入力する場合は、読点（、）やカンマ（,）、スペースで区切ってください。<br/>
+                    既に存在する部首・部品名は個別にエラーが表示されます。
                 </p>
                 <input
                   type="text"
@@ -173,7 +181,9 @@ export default function RadicalRequestForm() {
               <div className="p-4 bg-green-100 border border-green-400 text-green-700 rounded-md">
                   <div className="flex items-start justify-between">
                       <div className="flex-1">
-                          <p className="font-medium">✅ リクエストが送信されました！</p>
+                          <p className="font-medium">
+                            {submitResults.failed.length === 0 ? '✅ すべてのリクエストが送信されました！' : '⚠️ 一部のリクエストが送信されました'}
+                          </p>
                           {/* 成功した部首名 */}
                           {submitResults.success.length > 0 && (
                             <div className="mt-3">
@@ -217,7 +227,8 @@ export default function RadicalRequestForm() {
 
             {submitStatus === 'error' && (
               <div className="p-4 bg-red-100 border border-red-400 text-red-700 rounded-md">
-                  <p className="font-medium">❌ エラーが発生しました</p>
+                  <p className="font-medium">❌ エラー</p>
+                  <p className="text-sm mt-1">{errorMessage}</p>
               </div>
             )}
         </form>
