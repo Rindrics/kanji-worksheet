@@ -253,13 +253,16 @@ function HomePageContent() {
               >
                 🖨️ ワークシートを印刷
               </button>
-              <button
-                onClick={togglePrintMode}
-                className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
-                title="印刷レイアウトを確認"
-              >
-                👁️ 印刷プレビュー
-              </button>
+              {/* 開発環境でのみ印刷プレビューボタンを表示 */}
+              {process.env.NODE_ENV !== 'production' && (
+                <button
+                  onClick={togglePrintMode}
+                  className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
+                  title="印刷レイアウトを確認"
+                >
+                  👁️ 印刷プレビュー
+                </button>
+              )}
             </div>
           </section>
         )}
