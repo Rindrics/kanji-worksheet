@@ -1,15 +1,14 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { RadicalSelector } from '@/components/kanji/RadicalSelector';
 import { KanjiGrid } from '@/components/kanji/KanjiGrid';
 import { useKanjiSearch } from '@/hooks/useKanjiSearch';
 import { type RadicalType, radicalInfo } from '@/data/kanji';
-import { Kanji } from '@/types/kanji';
 import { APP_CONFIG } from '@/constants/app';
 
-export default function HomePage() {
+function HomePageContent() {
   const searchParams = useSearchParams();
   const [isPrintMode, setIsPrintMode] = useState(false);
 
@@ -102,10 +101,10 @@ export default function HomePage() {
     }
   };
 
-  const handleKanjiClick = (kanji: Kanji) => {
-    console.log('選択された漢字:', kanji.character, kanji);
-    // 将来的に詳細表示や印刷選択に使用
-  };
+  // 将来的に詳細表示や印刷選択に使用する予定
+  // const handleKanjiClick = (kanji: Kanji) => {
+  //   console.log('選択された漢字:', kanji.character, kanji);
+  // };
 
   const togglePrintMode = () => {
     const newPrintMode = !isPrintMode;
@@ -265,5 +264,20 @@ export default function HomePage() {
         </section>
       </div>
     </main>
+  );
+}
+
+export default function HomePage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto mb-4"></div>
+          <p className="text-gray-500">読み込み中...</p>
+        </div>
+      </div>
+    }>
+      <HomePageContent />
+    </Suspense>
   );
 }

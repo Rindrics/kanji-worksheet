@@ -28,5 +28,5 @@ export function searchByStrokeCount(min: number, max: number): Kanji[] {
 
 // 部首のバリエーション検索
 export function getRadicalVariants(radical: RadicalType): string[] {
-  return radicalSearchPatterns[radical] || [];
+  return [...(radicalSearchPatterns[radical] || [])];
 }

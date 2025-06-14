@@ -1,5 +1,4 @@
 import { Kanji } from '@/types/kanji';
-import { Card } from '@/components/ui/Card';
 import { StrokeOrderDisplay } from './StrokeOrderDisplay';
 import { KanjiSVGDisplay } from './KanjiSVGDisplay';
 

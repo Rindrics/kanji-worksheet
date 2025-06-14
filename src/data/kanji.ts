@@ -1,6 +1,6 @@
 // データソース管理ファイル
 import type { Kanji } from '@/types/kanji';
-import { radicalInfo, radicalSearchPatterns, type RadicalType, type RadicalInfo } from '@/config/radicals';
+import { radicalInfo, radicalSearchPatterns, type RadicalType } from '@/config/radicals';
 
 // デフォルトで生成されたKanjiVGデータを使用、モックデータはフォールバックのみ
 let kanjiData: Kanji[] = [];
@@ -8,12 +8,14 @@ let kanjiData: Kanji[] = [];
 // データソースの動的ロード
 try {
   // 生成されたKanjiVGデータを使用
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const generated = require('./generated-kanji');
   kanjiData = generated.generatedKanji || [];
   console.log(`✅ Using generated KanjiVG data (${kanjiData.length} characters)`);
-} catch (error) {
+} catch {
   console.warn('⚠️ Generated KanjiVG data not found, falling back to mock data');
   // フォールバック: モックデータを使用
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const mock = require('./mock-kanji');
   kanjiData = mock.mockKanji || [];
   console.log(`🔧 Fallback to mock data (${kanjiData.length} characters)`);

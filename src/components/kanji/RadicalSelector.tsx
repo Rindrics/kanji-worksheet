@@ -1,5 +1,4 @@
 import { type RadicalType, radicalInfo } from '@/data/kanji';
-import { getKanjiStats } from '@/lib/search';
 
 interface RadicalSelectorProps {
   selectedRadical: RadicalType | null;
@@ -8,7 +7,6 @@ interface RadicalSelectorProps {
 }
 
 export function RadicalSelector({ selectedRadical, onRadicalSelect, loading = false }: RadicalSelectorProps) {
-  const stats = getKanjiStats();
 
   return (
     <div className="mb-6 radical-selector print-hide">

@@ -1,14 +1,14 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { KanjiGrid } from '@/components/kanji/KanjiGrid';
 import { searchKanjiByRadical, type RadicalType, radicalInfo } from '@/data/kanji';
-import { APP_CONFIG } from '@/constants/app';
+import type { Kanji } from '@/types/kanji';
 
-export default function PrintPreviewPage() {
+function PrintPreviewPageContent() {
   const searchParams = useSearchParams();
-  const [kanjiList, setKanjiList] = useState<any[]>([]);
+  const [kanjiList, setKanjiList] = useState<Kanji[]>([]);
   const [selectedRadical, setSelectedRadical] = useState<RadicalType | null>(null);
 
   useEffect(() => {
@@ -255,5 +255,20 @@ export default function PrintPreviewPage() {
         </main>
       </div>
     </div>
+  );
+}
+
+export default function PrintPreviewPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto mb-4"></div>
+          <p className="text-gray-500">読み込み中...</p>
+        </div>
+      </div>
+    }>
+      <PrintPreviewPageContent />
+    </Suspense>
   );
 }
