@@ -5,6 +5,7 @@ export const radicalSearchPatterns = {
   '水': ['水', '氵'], // 水、さんずい
   '火': ['火', '灬'], // 火、れっか、その他火関連
   '魚': ['魚'], // 魚、うおへん
+  '木': ['木'], // 木へん
   '金': ['金'], // 金へん
 } as const;
 
@@ -43,6 +44,12 @@ export const radicalInfo: RadicalInfo[] = [
     name: '魚へん',
     description: '魚に関係する漢字',
     variants: radicalSearchPatterns['魚'],
+  },
+  {
+    id: '木' as RadicalType,
+    name: '木へん',
+    description: '木に関係する漢字',
+    variants: radicalSearchPatterns['木'],
   },
   {
     id: '金' as RadicalType,
