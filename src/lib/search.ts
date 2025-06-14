@@ -38,7 +38,17 @@ export function searchByRadical(radical: RadicalType): Kanji[] {
     );
   });
 
-  console.log(`📊 Found ${results.length} characters for radical: ${radical}`);
+  // 画数の少ない順にソート
+  results.sort((a, b) => {
+    // 画数を優先してソート
+    if (a.strokeCount !== b.strokeCount) {
+      return a.strokeCount - b.strokeCount;
+    }
+    // 画数が同じ場合は文字コード順でソート（安定したソート）
+    return a.character.localeCompare(b.character);
+  });
+
+  console.log(`📊 Found ${results.length} characters for radical: ${radical} (sorted by stroke count)`);
   return results;
 }
 
