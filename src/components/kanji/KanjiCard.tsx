@@ -24,8 +24,15 @@ export function KanjiCard({ kanji }: KanjiCardProps) {
       <div className="print-only grid grid-cols-2 grid-rows-2 gap-1">
         {/* 左上：なぞり書き用（書き順付き） */}
         <div className="flex items-center justify-center border border-gray-400 relative">
+          {/* 背景グリッド */}
+          <svg className="absolute inset-0 w-full h-full z-0" viewBox="0 0 100 100">
+            {/* 縦線 */}
+            <line x1="50" y1="0" x2="50" y2="100" stroke="#e0e0e0" strokeWidth="0.5" strokeDasharray="2,2" />
+            {/* 横線 */}
+            <line x1="0" y1="50" x2="100" y2="50" stroke="#e0e0e0" strokeWidth="0.5" strokeDasharray="2,2" />
+          </svg>
           {/* なぞり書き用の薄いグレー漢字 */}
-          <div className="w-full h-full p-1">
+          <div className="w-full h-full p-1 relative z-10">
             <KanjiSVGDisplay
               kanji={kanji}
               className="w-full h-full"
@@ -35,19 +42,32 @@ export function KanjiCard({ kanji }: KanjiCardProps) {
           {/* 書き順番号オーバーレイ */}
           <StrokeOrderDisplay
             kanji={kanji}
-            className="absolute inset-0 stroke-order-overlay"
+            className="absolute inset-0 stroke-order-overlay z-20"
           />
         </div>
 
         {/* 右上：空欄（自分で書く用） */}
-        <div className="flex items-center justify-center border border-gray-400">
-          {/* 空欄 */}
+        <div className="flex items-center justify-center border border-gray-400 relative">
+          {/* 背景グリッド */}
+          <svg className="absolute inset-0 w-full h-full z-0" viewBox="0 0 100 100">
+            {/* 縦線 */}
+            <line x1="50" y1="0" x2="50" y2="100" stroke="#e0e0e0" strokeWidth="0.5" strokeDasharray="2,2" />
+            {/* 横線 */}
+            <line x1="0" y1="50" x2="100" y2="50" stroke="#e0e0e0" strokeWidth="0.5" strokeDasharray="2,2" />
+          </svg>
         </div>
 
         {/* 左下：なぞり書き用（書き順付き） */}
         <div className="flex items-center justify-center border border-gray-400 relative">
+          {/* 背景グリッド */}
+          <svg className="absolute inset-0 w-full h-full z-0" viewBox="0 0 100 100">
+            {/* 縦線 */}
+            <line x1="50" y1="0" x2="50" y2="100" stroke="#e0e0e0" strokeWidth="0.5" strokeDasharray="2,2" />
+            {/* 横線 */}
+            <line x1="0" y1="50" x2="100" y2="50" stroke="#e0e0e0" strokeWidth="0.5" strokeDasharray="2,2" />
+          </svg>
           {/* なぞり書き用の薄いグレー漢字 */}
-          <div className="w-full h-full p-1">
+          <div className="w-full h-full p-1 relative z-10">
             <KanjiSVGDisplay
               kanji={kanji}
               className="w-full h-full"
@@ -57,13 +77,19 @@ export function KanjiCard({ kanji }: KanjiCardProps) {
           {/* 書き順番号オーバーレイ */}
           <StrokeOrderDisplay
             kanji={kanji}
-            className="absolute inset-0 stroke-order-overlay"
+            className="absolute inset-0 stroke-order-overlay z-20"
           />
         </div>
 
         {/* 右下：空欄（自分で書く用） */}
-        <div className="flex items-center justify-center border border-gray-400">
-          {/* 空欄 */}
+        <div className="flex items-center justify-center border border-gray-400 relative">
+          {/* 背景グリッド */}
+          <svg className="absolute inset-0 w-full h-full z-0" viewBox="0 0 100 100">
+            {/* 縦線 */}
+            <line x1="50" y1="0" x2="50" y2="100" stroke="#e0e0e0" strokeWidth="0.5" strokeDasharray="2,2" />
+            {/* 横線 */}
+            <line x1="0" y1="50" x2="100" y2="50" stroke="#e0e0e0" strokeWidth="0.5" strokeDasharray="2,2" />
+          </svg>
         </div>
       </div>
     </div>
