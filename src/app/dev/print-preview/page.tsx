@@ -159,9 +159,10 @@ export default function PrintPreviewPage() {
 
       .print-preview-mode .stroke-order-overlay text {
         font-size: 7pt !important;
-        fill: #333 !important;
-        font-weight: bold !important;
-        font-family: Arial, sans-serif !important;
+      }
+
+      .print-preview-mode .stroke-order-overlay path {
+        stroke-width: 0.8pt !important;
       }
 
       /* グリッドレイアウト最適化 */

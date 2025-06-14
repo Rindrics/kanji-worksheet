@@ -57,6 +57,14 @@ body {
   font-family: Arial, sans-serif;
 }
 
+.stroke-order-overlay path {
+  stroke: #666;
+  stroke-width: 1px;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 /* 印刷時専用の縦書きスタイル */
 @media print {
   /* 印刷時に非表示にするための汎用クラス */
@@ -192,9 +200,10 @@ body {
 
   .stroke-order-overlay text {
     font-size: 7pt !important;
-    fill: #333 !important;
-    font-weight: bold !important;
-    font-family: Arial, sans-serif !important;
+  }
+
+  .stroke-order-overlay path {
+    stroke-width: 0.8pt !important;
   }
 
   /* 練習用セクションの枠線 */
