@@ -34,18 +34,61 @@ function loadRadicalConfig() {
   // 末尾のカンマを除去（JSONでは無効）
   patternsStr = patternsStr.replace(/,(\s*})/g, '$1');
 
+  let patterns;
   try {
-    const patterns = JSON.parse(patternsStr);
+    patterns = JSON.parse(patternsStr);
     console.log('📋 Loaded radical patterns from TypeScript:', patterns);
-    return patterns;
   } catch (error) {
-    console.error('❌ Failed to parse radical config:', error.message);
-    console.error('📄 Config content:', patternsStr);
+    console.error('❌ Failed to parse radical patterns:', error.message);
+    console.error('📄 Patterns content:', patternsStr);
     throw error;
   }
+
+  // radicalInfo配列も抽出
+  const radicalInfoMatch = configContent.match(/radicalInfo:\s*RadicalInfo\[\]\s*=\s*(\[[\s\S]*?\]);/);
+
+  if (!radicalInfoMatch) {
+    throw new Error('radicalInfo not found in config file');
+  }
+
+  let radicalInfoStr = radicalInfoMatch[1];
+
+  // 行コメント（//）を除去
+  radicalInfoStr = radicalInfoStr.replace(/\/\/.*$/gm, '');
+
+  // シングルクォートをダブルクォートに変換
+  radicalInfoStr = radicalInfoStr.replace(/'/g, '"');
+
+  // TypeScript特有の型キャストを除去
+  radicalInfoStr = radicalInfoStr.replace(/as RadicalType/g, '');
+
+  // プロパティ名をクォートする（JSON形式に変換）
+  radicalInfoStr = radicalInfoStr.replace(/(\w+):/g, '"$1":');
+
+  // variants プロパティの値を実際の配列に置換（patternsが既に読み込まれているので使用可能）
+  // 動的にすべての部首に対して置換を実行
+  for (const [radicalKey, radicalVariants] of Object.entries(patterns)) {
+    const pattern = new RegExp(`"variants":\\s*radicalSearchPatterns\\["${radicalKey}"\\]`, 'g');
+    radicalInfoStr = radicalInfoStr.replace(pattern, `"variants": ${JSON.stringify(radicalVariants)}`);
+  }
+
+  // 末尾のカンマを除去（JSONでは無効）
+  radicalInfoStr = radicalInfoStr.replace(/,(\s*[\]}])/g, '$1');
+
+  let radicalInfo;
+  try {
+    radicalInfo = JSON.parse(radicalInfoStr);
+    console.log('📋 Loaded radical info from TypeScript:', radicalInfo);
+  } catch (error) {
+    console.error('❌ Failed to parse radical info:', error.message);
+    console.error('📄 RadicalInfo content:', radicalInfoStr);
+    throw error;
+  }
+
+  return { patterns, radicalInfo };
 }
 
-const TARGET_RADICALS = loadRadicalConfig();
+const { patterns: TARGET_RADICALS, radicalInfo: RADICAL_INFO } = loadRadicalConfig();
 
 async function downloadKanjiVG() {
   console.log('📥 Downloading KanjiVG data...');
@@ -213,6 +256,14 @@ function extractRadicalsFromSVG(svgContent, character) {
 }
 
 function isTargetKanji(character, radicals) {
+  // まず除外文字をチェック
+  for (const radicalInfo of RADICAL_INFO) {
+    if (radicalInfo.excludeCharacter && radicalInfo.excludeCharacter.includes(character)) {
+      console.log(`🚫 Excluding character: ${character} (matched excludeCharacter)`);
+      return false;
+    }
+  }
+
   // 抽出された部首が対象部首のいずれかに含まれるかチェック
   for (const [radical, variants] of Object.entries(TARGET_RADICALS)) {
     for (const variant of variants) {

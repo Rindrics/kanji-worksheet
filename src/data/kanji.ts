@@ -58,13 +58,14 @@ export function searchKanjiByRadical(radical: RadicalType): Kanji[] {
   // 対応する部首情報から除外リストを取得
   const radicalInfoItem = radicalInfo.find(info => info.id === radical);
   const excludeComponents = radicalInfoItem?.excludeComponents || [];
+  const excludeCharacter = radicalInfoItem?.excludeCharacter || [];
 
   // 型安全性のため配列にキャスト
   const patternArray = [...patterns] as string[];
 
   return allKanji.filter(kanji => {
-    // デフォルト除外：部首文字そのものを除外
-    if (patternArray.includes(kanji.character)) {
+    // 文字除外：指定された文字そのものを除外
+    if (excludeCharacter.includes(kanji.character)) {
       return false;
     }
 

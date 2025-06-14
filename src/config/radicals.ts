@@ -17,6 +17,7 @@ export interface RadicalInfo {
   description: string;
   variants: readonly string[];
   excludeComponents?: string[];
+  excludeCharacter?: string[];
 }
 
 // 部首情報（UI表示用）
@@ -26,14 +27,15 @@ export const radicalInfo: RadicalInfo[] = [
     name: '水・さんずい',
     description: '水に関係する漢字',
     variants: radicalSearchPatterns['水'],
+    excludeCharacter: ['氵', '氺'],
   },
   {
     id: '火' as RadicalType,
     name: '火へん・れっか',
     description: '火に関係する漢字',
     variants: radicalSearchPatterns['火'],
-    // 構成要素として含む場合に除外する漢字（例：「馬」を含む「駆」「駅」なども除外）
-    excludeComponents: ['馬', '魚', '鳥'],
+    excludeComponents: ['馬', '魚', '鳥', '寫', '黒'],
+    excludeCharacter: ['灬'],
   },
   {
     id: '魚' as RadicalType,
