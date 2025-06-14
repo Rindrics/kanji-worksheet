@@ -2,6 +2,12 @@
   "name": "kanji-worksheet",
   "version": "0.1.0",
   "private": true,
+  "license": "CC-BY-SA-3.0",
+  "description": "漢字練習ワークシート生成アプリケーション",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Rindrics/kanji-worksheet.git"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "pnpm run build-kanji && next build",

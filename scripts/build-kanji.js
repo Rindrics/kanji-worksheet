@@ -345,6 +345,10 @@ function generateTypeScriptFile(kanjiData) {
   const content = `// このファイルは自動生成されます。手動で編集しないでください。
 // Generated from KanjiVG data at ${new Date().toISOString()}
 // Total: ${kanjiData.length} characters
+//
+// KanjiVG © Ulrich Apel
+// Licensed under Creative Commons Attribution-Share Alike 3.0
+// https://creativecommons.org/licenses/by-sa/3.0/
 
 import { Kanji } from '@/types/kanji';
 

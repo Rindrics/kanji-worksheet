@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { RadicalSelector } from '@/components/kanji/RadicalSelector';
 import { KanjiGrid } from '@/components/kanji/KanjiGrid';
+import Footer from '@/components/common/Footer';
 import { useKanjiSearch } from '@/hooks/useKanjiSearch';
 import { type RadicalType, radicalInfo } from '@/data/kanji';
 import { APP_CONFIG } from '@/constants/app';
@@ -177,6 +178,9 @@ function HomePageContent() {
               <div className="text-sm text-center text-gray-600 mb-4">
                 漢字数: {results.length} | {new Date().toLocaleDateString('ja-JP')}
               </div>
+              <div className="text-xs text-center text-gray-500 mb-4">
+                筆順データ: KanjiVG © Ulrich Apel - CC BY-SA 3.0
+              </div>
             </div>
           )}
 
@@ -281,6 +285,9 @@ function HomePageContent() {
             />
           )}
         </section>
+
+        {/* フッター */}
+        <Footer />
       </div>
     </main>
   );
