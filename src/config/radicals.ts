@@ -11,6 +11,7 @@ export const radicalSearchPatterns = {
   '月': ['月'],
   '手': ['手', '扌'],
   '艹': ['艹'],
+  '米': ['米'], // 米へん
 } as const;
 
 // 型定義を動的に生成
@@ -87,6 +88,12 @@ export const radicalInfo: RadicalInfo[] = [
     description: '草に関係する漢字',
     variants: radicalSearchPatterns['艹'],
     excludeCharacter: ['艹'],
+  },
+  {
+    id: '米' as RadicalType,
+    name: '米へん',
+    description: '米に関係する漢字',
+    variants: radicalSearchPatterns['米'],
   },
 ];
 
