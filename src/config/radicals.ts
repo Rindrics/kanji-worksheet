@@ -4,6 +4,7 @@
 export const radicalSearchPatterns = {
   '水': ['水', '氵'], // 水、さんずい
   '火': ['火', '灬'], // 火、れっか、その他火関連
+  '魚': ['魚'], // 魚、うおへん
 } as const;
 
 // 型定義を動的に生成
@@ -33,6 +34,12 @@ export const radicalInfo: RadicalInfo[] = [
     variants: radicalSearchPatterns['火'],
     // 構成要素として含む場合に除外する漢字（例：「馬」を含む「駆」「駅」なども除外）
     excludeComponents: ['馬', '魚', '鳥'],
+  },
+  {
+    id: '魚' as RadicalType,
+    name: '魚へん',
+    description: '魚に関係する漢字',
+    variants: radicalSearchPatterns['魚'],
   },
 ];
 
