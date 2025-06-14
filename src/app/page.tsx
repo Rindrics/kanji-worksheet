@@ -53,31 +53,6 @@ export default function HomePage() {
     // 将来的に詳細表示や印刷選択に使用
   };
 
-  const handlePdfDownload = async () => {
-    if (!selectedRadical) return;
-    
-    try {
-      const response = await fetch(`/api/generate-pdf?radical=${selectedRadical}`);
-      
-      if (!response.ok) {
-        throw new Error('PDF生成に失敗しました');
-      }
-
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.style.display = 'none';
-      a.href = url;
-      a.download = `${selectedRadical}ワークシート.pdf`;
-      document.body.appendChild(a);
-      a.click();
-      window.URL.revokeObjectURL(url);
-    } catch (error) {
-      console.error('PDF生成エラー:', error);
-      alert('PDF生成に失敗しました。もう一度お試しください。');
-    }
-  };
-
   return (
     <main className="min-h-screen bg-gray-50">
       <div className="container mx-auto p-6">
@@ -103,31 +78,13 @@ export default function HomePage() {
         {/* 印刷ボタン */}
         {results.length > 0 && (
           <section className="text-center mb-6 print-hide">
-            <div className="flex justify-center space-x-4">
-              <button
-                onClick={handlePdfDownload}
-                className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md"
-              >
-                📄 PDFをダウンロード
-              </button>
-              
-              <button
-                onClick={() => window.print()}
-                className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors"
-                title="ブラウザで直接印刷"
-              >
-                🖨️ 印刷
-              </button>
-              
-              {/* 開発用プレビューボタン */}
-              <button
-                onClick={() => window.open(`/dev/print-preview?radical=${selectedRadical}`, '_blank')}
-                className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors text-sm"
-                title="開発用: 印刷レイアウトをブラウザで確認"
-              >
-                🔧 プレビュー
-              </button>
-            </div>
+            <button
+              onClick={() => window.print()}
+              className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-md"
+              title="ブラウザで直接印刷"
+            >
+              🖨️ ワークシートを印刷
+            </button>
           </section>
         )}
 

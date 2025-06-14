@@ -10,7 +10,6 @@
     "build-kanji": "node scripts/build-kanji.js"
   },
   "dependencies": {
-    "@react-pdf/renderer": "^4.3.0",
     "next": "15.3.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
