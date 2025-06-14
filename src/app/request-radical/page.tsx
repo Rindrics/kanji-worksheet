@@ -1,4 +1,5 @@
 import RadicalRequestForm from '@/components/RadicalRequestForm';
+import Footer from '@/components/common/Footer';
 import Link from 'next/link';
 
 export default function RequestRadicalPage() {
@@ -22,6 +23,9 @@ export default function RequestRadicalPage() {
         <section className="max-w-4xl mx-auto">
           <RadicalRequestForm />
         </section>
+
+        {/* フッター */}
+        <Footer />
       </div>
     </main>
   );

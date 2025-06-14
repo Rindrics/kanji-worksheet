@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { RadicalSelector } from '@/components/kanji/RadicalSelector';
 import { KanjiGrid } from '@/components/kanji/KanjiGrid';
+import Footer from '@/components/common/Footer';
 import { useKanjiSearch } from '@/hooks/useKanjiSearch';
 import { type RadicalType, radicalInfo } from '@/data/kanji';
 import { APP_CONFIG } from '@/constants/app';
@@ -59,16 +60,7 @@ function HomePageContent() {
     }
   }, [selectedRadical]);
 
-  // 印刷時のURL表示用にCSS変数を設定
-  useEffect(() => {
-    // 現在のURLを取得（開発時は定数、本番は実際のURL）
-    const currentUrl = typeof window !== 'undefined'
-      ? window.location.origin
-      : APP_CONFIG.SITE_URL;
 
-    // CSS変数として設定
-    document.documentElement.style.setProperty('--print-site-url', `"${currentUrl}"`);
-  }, []);
 
   // 印刷モード用のスタイルを動的に適用
   useEffect(() => {
@@ -177,6 +169,9 @@ function HomePageContent() {
               <div className="text-sm text-center text-gray-600 mb-4">
                 漢字数: {results.length} | {new Date().toLocaleDateString('ja-JP')}
               </div>
+              <div className="text-xs text-center text-gray-500 mb-4">
+                筆順データ: KanjiVG © Ulrich Apel - CC BY-SA 3.0
+              </div>
             </div>
           )}
 
@@ -277,10 +272,13 @@ function HomePageContent() {
           ) : (
             <KanjiGrid
               kanjiList={results}
-              title={selectedRadical ? `${selectedRadical}に関係する漢字` : undefined}
+              title={selectedRadical ? `${selectedRadical}に関係する漢字（${results.length}個）` : undefined}
             />
           )}
         </section>
+
+        {/* フッター */}
+        <Footer />
       </div>
     </main>
   );
