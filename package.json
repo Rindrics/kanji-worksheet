@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "pnpm run build-kanji && next build",
     "start": "next start",
     "lint": "next lint",
     "build-kanji": "node scripts/build-kanji.js"
