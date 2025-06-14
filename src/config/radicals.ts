@@ -81,6 +81,7 @@ export const radicalInfo: RadicalInfo[] = [
     name: '手・てへん',
     description: '手に関係する漢字',
     variants: radicalSearchPatterns['手'],
+    excludeCharacter: ['扌'],
   },
   {
     id: '艹' as RadicalType,
