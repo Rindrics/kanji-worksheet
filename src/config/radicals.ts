@@ -7,7 +7,9 @@ export const radicalSearchPatterns = {
   '魚': ['魚'], // 魚、うおへん
   '木': ['木', '禾'], // 木へん
   '金': ['金'], // 金へん
-  '人・月・手': ['人・月・手'], // 人・月・手へん
+  '人': ['人', '亻'],
+  '月': ['月'],
+  '手': ['手', '扌'],
 } as const;
 
 // 型定義を動的に生成
@@ -59,10 +61,24 @@ export const radicalInfo: RadicalInfo[] = [
     variants: radicalSearchPatterns['金'],
   },
   {
-    id: '人・月・手' as RadicalType,
-    name: '人・月・手へん',
-    description: '人・月・手に関係する漢字',
-    variants: radicalSearchPatterns['人・月・手'],
+    id: '人' as RadicalType,
+    name: '人, にんべん',
+    description: '人に関係する漢字',
+    variants: radicalSearchPatterns['人'],
+    excludeCharacter: ['亻'],
+    excludeComponents: ['彳', '隹', '合', '倉', '拳', '秦', '余', '今', '令', '龰', '券', '侖', '參', '参'],
+  },
+  {
+    id: '月' as RadicalType,
+    name: '月・にくづき',
+    description: '体に関係する漢字・「月」を含む漢字',
+    variants: radicalSearchPatterns['月'],
+  },
+  {
+    id: '手' as RadicalType,
+    name: '手・てへん',
+    description: '手に関係する漢字',
+    variants: radicalSearchPatterns['手'],
   },
 ];
 
