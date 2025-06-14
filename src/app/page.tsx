@@ -230,7 +230,7 @@ function HomePageContent() {
           <div className="mt-6 pt-6 border-t border-gray-200 print-hide">
             <div className="text-center">
               <p className="text-sm text-gray-600 mb-3">
-                探している部首グループが見つからない場合
+                探している部首・部品グループが見つからない場合
               </p>
               <Link
                 href="/request-radical"
