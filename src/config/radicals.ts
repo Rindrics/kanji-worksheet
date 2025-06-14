@@ -10,6 +10,7 @@ export const radicalSearchPatterns = {
   '人': ['人', '亻'],
   '月': ['月'],
   '手': ['手', '扌'],
+  '艹': ['艹'],
   '米': ['米'], // 米へん
 } as const;
 
@@ -80,6 +81,13 @@ export const radicalInfo: RadicalInfo[] = [
     name: '手・てへん',
     description: '手に関係する漢字',
     variants: radicalSearchPatterns['手'],
+  },
+  {
+    id: '艹' as RadicalType,
+    name: '草・くさかんむり',
+    description: '草に関係する漢字',
+    variants: radicalSearchPatterns['艹'],
+    excludeCharacter: ['艹'],
   },
   {
     id: '米' as RadicalType,
