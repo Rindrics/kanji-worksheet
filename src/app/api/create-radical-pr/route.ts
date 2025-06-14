@@ -65,7 +65,7 @@ async function createGitHubAppClient(appId: string, privateKey: string, installa
 }
 
 // 既存の部首設定ファイルを読み取って新しい部首を追加
-async function updateRadicalConfig(octokit: any, radicalName: string) {
+async function updateRadicalConfig(octokit: InstanceType<typeof Octokit>, radicalName: string) {
   const filePath = 'src/config/radicals.ts';
 
   // メインブランチから既存ファイルを取得
@@ -76,11 +76,13 @@ async function updateRadicalConfig(octokit: any, radicalName: string) {
     ref: APP_CONFIG.GITHUB.BASE_BRANCH,
   });
 
-  const existingContent = Buffer.from(existingFile.content, 'base64').toString('utf-8');
+  // ファイルデータの型アサーション
+  const fileData = existingFile as { content: string; sha: string };
+  const existingContent = Buffer.from(fileData.content, 'base64').toString('utf-8');
 
   // 重複チェック
   if (checkIfRadicalExists(existingContent, radicalName)) {
-    throw new Error(`部首「${radicalName}」は既に存在します。どうぞご利用ください。`);
+    throw new Error(`部首「${radicalName}」は既に存在します。既存の部首グループをご確認ください。`);
   }
 
   // 新しい部首を追加する処理
@@ -89,7 +91,7 @@ async function updateRadicalConfig(octokit: any, radicalName: string) {
   return {
     path: filePath,
     content: newContent,
-    sha: existingFile.sha
+    sha: fileData.sha
   };
 }
 

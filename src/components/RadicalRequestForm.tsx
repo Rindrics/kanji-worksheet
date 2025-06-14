@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 interface RadicalRequestData {
   radicalName: string;
@@ -215,12 +216,12 @@ export default function RadicalRequestForm() {
                             </div>
                           )}
                       </div>
-                      <a
+                      <Link
                         href="/"
                         className="ml-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors whitespace-nowrap"
                       >
                           ホームに戻る
-                      </a>
+                      </Link>
                   </div>
               </div>
             )}
