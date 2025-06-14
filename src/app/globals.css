@@ -65,6 +65,119 @@ body {
   stroke-linejoin: round;
 }
 
+/* 印刷モード用スタイル（?print=true でアクセスした時） */
+.print-mode-enabled .print-mode-view {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: 14pt;
+  line-height: 1.6;
+  margin: 0;
+  padding: 20pt;
+}
+
+.print-mode-enabled .print-mode-view .screen-only {
+  display: none;
+}
+
+.print-mode-enabled .print-mode-view .print-only {
+  display: grid !important;
+}
+
+.print-mode-enabled .print-mode-view .grid {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  display: block;
+}
+
+.print-mode-enabled .print-mode-view .kanji-card {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  break-inside: avoid;
+  margin-bottom: 15pt;
+  padding: 4pt;
+  border: 1pt solid #333;
+  display: inline-block;
+  width: 80pt;
+  height: 80pt;
+  background: white !important;
+}
+
+.print-mode-enabled .print-mode-view .kanji-card .print-only {
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2pt;
+  height: 100%;
+  width: 100%;
+}
+
+.print-mode-enabled .print-mode-view .kanji-character {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  font-feature-settings: "vert" 1;
+  font-size: 26pt;
+  line-height: 1;
+}
+
+.print-mode-enabled .print-mode-view .text-gray-300 {
+  color: #ddd !important;
+  font-weight: 200;
+  writing-mode: vertical-rl !important;
+  text-orientation: upright !important;
+}
+
+.print-mode-enabled .print-mode-view .stroke-order-overlay {
+  pointer-events: none;
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
+}
+
+.print-mode-enabled .print-mode-view .stroke-order-overlay svg {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none !important;
+}
+
+.print-mode-enabled .print-mode-view .stroke-order-overlay text {
+  font-size: 7pt !important;
+}
+
+.print-mode-enabled .print-mode-view .stroke-order-overlay path {
+  stroke-width: 0.8pt !important;
+}
+
+.print-mode-enabled .print-mode-view .kanji-card .border {
+  border: 0.5pt solid #666 !important;
+  position: relative;
+}
+
+.print-mode-enabled .print-mode-view .kanji-card .border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  right: 0;
+  bottom: 0;
+  border-left: 0.3pt dashed #ccc;
+  pointer-events: none;
+}
+
+.print-mode-enabled .print-mode-view .kanji-card .border::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-top: 0.3pt dashed #ccc;
+  pointer-events: none;
+}
+
 /* 印刷時専用の縦書きスタイル */
 @media print {
   /* 印刷時に非表示にするための汎用クラス */
