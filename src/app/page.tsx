@@ -60,16 +60,7 @@ function HomePageContent() {
     }
   }, [selectedRadical]);
 
-  // 印刷時のURL表示用にCSS変数を設定
-  useEffect(() => {
-    // 現在のURLを取得（開発時は定数、本番は実際のURL）
-    const currentUrl = typeof window !== 'undefined'
-      ? window.location.origin
-      : APP_CONFIG.SITE_URL;
 
-    // CSS変数として設定
-    document.documentElement.style.setProperty('--print-site-url', `"${currentUrl}"`);
-  }, []);
 
   // 印刷モード用のスタイルを動的に適用
   useEffect(() => {
