@@ -158,7 +158,7 @@ export default function PrintPreviewPage() {
       }
 
       .print-preview-mode .stroke-order-overlay text {
-        font-size: 7pt !important;
+        fill: #000 !important;
       }
 
       .print-preview-mode .stroke-order-overlay path {

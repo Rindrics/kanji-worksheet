@@ -29,7 +29,7 @@ export function KanjiCard({ kanji }: KanjiCardProps) {
             <KanjiSVGDisplay
               kanji={kanji}
               className="w-full h-full"
-              opacity={0.3}
+              variant="light"
             />
           </div>
           {/* 書き順番号オーバーレイ */}
@@ -51,7 +51,7 @@ export function KanjiCard({ kanji }: KanjiCardProps) {
             <KanjiSVGDisplay
               kanji={kanji}
               className="w-full h-full"
-              opacity={0.3}
+              variant="light"
             />
           </div>
           {/* 書き順番号オーバーレイ */}

@@ -41,7 +41,7 @@ export function StrokeOrderDisplay({ kanji, className = '' }: StrokeOrderDisplay
                 textAnchor="middle"
                 dominantBaseline="middle"
                 fontSize="10"
-                fill="#333"
+                fill="#000"
                 fontWeight="bold"
                 fontFamily="Arial, sans-serif"
               >
@@ -53,7 +53,7 @@ export function StrokeOrderDisplay({ kanji, className = '' }: StrokeOrderDisplay
                 <g transform={`translate(${x + 15}, ${y}) rotate(${direction.angle})`}>
                   <path
                     d={`M${-direction.length/2},0 L${direction.length/2},0 M${direction.length/2},0 L${direction.length/2-3},-2 M${direction.length/2},0 L${direction.length/2-3},2`}
-                    stroke="#666"
+                    stroke="#000"
                     strokeWidth="1"
                     fill="none"
                     strokeLinecap="round"

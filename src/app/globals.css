@@ -52,13 +52,13 @@ body {
 
 .stroke-order-overlay text {
   font-size: 10px;
-  fill: #333;
+  fill: #000;
   font-weight: bold;
   font-family: Arial, sans-serif;
 }
 
 .stroke-order-overlay path {
-  stroke: #666;
+  stroke: #000;
   stroke-width: 1px;
   fill: none;
   stroke-linecap: round;
@@ -155,9 +155,11 @@ body {
 
 .print-mode-enabled .print-mode-view .stroke-order-overlay text {
   font-size: 7pt !important;
+  fill: #000 !important;
 }
 
 .print-mode-enabled .print-mode-view .stroke-order-overlay path {
+  stroke: #000 !important;
   stroke-width: 0.8pt !important;
 }
 
@@ -335,9 +337,11 @@ body {
 
   .stroke-order-overlay text {
     font-size: 7pt !important;
+    fill: #000 !important;
   }
 
   .stroke-order-overlay path {
+    stroke: #000 !important;
     stroke-width: 0.8pt !important;
   }
 

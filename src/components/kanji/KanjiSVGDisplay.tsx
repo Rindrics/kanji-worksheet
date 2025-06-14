@@ -33,20 +33,20 @@ export function KanjiSVGDisplay({
     switch (variant) {
       case 'light':
         return {
-          stroke: "#ddd",
-          strokeWidth: "2.5",
-          opacity: 0.8
+          stroke: "#d5d5d5",
+          strokeWidth: "5",
+          opacity: 1.0
         };
       case 'outline':
         return {
           stroke: "#666",
-          strokeWidth: "1.5",
+          strokeWidth: "2.5",
           fill: "none"
         };
       default:
         return {
           stroke: "#333",
-          strokeWidth: "3",
+          strokeWidth: "4.5",
           fill: "none"
         };
     }
