@@ -5,7 +5,7 @@ export const radicalSearchPatterns = {
   '水': ['水', '氵'], // 水、さんずい
   '火': ['火', '灬'], // 火、れっか、その他火関連
   '魚': ['魚'], // 魚、うおへん
-  '木': ['木'], // 木へん
+  '木': ['木', '禾'], // 木へん
   '金': ['金'], // 金へん
 } as const;
 
@@ -47,13 +47,13 @@ export const radicalInfo: RadicalInfo[] = [
   },
   {
     id: '木' as RadicalType,
-    name: '木へん',
+    name: '木・きへん・のぎへん',
     description: '木に関係する漢字',
     variants: radicalSearchPatterns['木'],
   },
   {
     id: '金' as RadicalType,
-    name: '金へん',
+    name: '金・かねへん',
     description: '金に関係する漢字',
     variants: radicalSearchPatterns['金'],
   },
