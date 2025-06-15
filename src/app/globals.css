@@ -52,7 +52,6 @@ body {
 
 .stroke-order-overlay text {
   font-size: 5.6px;
-  fill: #000;
   font-weight: 300;
   font-family: Arial, sans-serif;
 }
@@ -153,16 +152,15 @@ body {
   pointer-events: none !important;
 }
 
-  .print-mode-enabled .print-mode-view .stroke-order-overlay text {
-    font-size: 6.7pt !important;
-    fill: #000 !important;
-    font-weight: 300 !important;
-  }
+.print-mode-enabled .print-mode-view .stroke-order-overlay text {
+  font-size: 6.7pt !important;
+  font-weight: 300 !important;
+}
 
-  .print-mode-enabled .print-mode-view .stroke-order-overlay path {
-    stroke: #000 !important;
-    stroke-width: 1.5pt !important;
-  }
+.print-mode-enabled .print-mode-view .stroke-order-overlay path {
+  stroke: #000 !important;
+  stroke-width: 1.5pt !important;
+}
 
 .print-mode-enabled .print-mode-view .kanji-card .border {
   border: 0.5pt solid #666 !important;
@@ -323,16 +321,15 @@ body {
     pointer-events: none !important;
   }
 
-      .stroke-order-overlay text {
-      font-size: 6.7pt !important;
-      fill: #000 !important;
-      font-weight: 300 !important;
-    }
+  .stroke-order-overlay text {
+    font-size: 6.7pt !important;
+    font-weight: 300 !important;
+  }
 
-      .stroke-order-overlay path {
-      stroke: #000 !important;
-      stroke-width: 1.5pt !important;
-    }
+  .stroke-order-overlay path {
+    stroke: #000 !important;
+    stroke-width: 1.5pt !important;
+  }
 
   /* 練習用セクションの枠線 */
   .kanji-card .border {
