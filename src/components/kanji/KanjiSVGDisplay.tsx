@@ -119,7 +119,7 @@ export function KanjiSVGDisplay({
       case 'light':
         return {
           stroke: isEvenStroke ? "#e5e5e5" : "#d3d3d3",
-          strokeWidth: "5",
+          strokeWidth: "4",
           opacity: 1.0
         };
       case 'outline':

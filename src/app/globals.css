@@ -391,4 +391,9 @@ body {
     stroke-width: 1pt !important;
     stroke-dasharray: 4,4 !important;
   }
+
+  /* 印刷時の漢字ストローク幅を80%に調整 */
+  .kanji-card .kanji-svg-container svg path {
+    stroke-width: 4pt !important;
+  }
 }
