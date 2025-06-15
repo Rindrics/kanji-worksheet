@@ -124,7 +124,7 @@ export function KanjiSVGDisplay({
         };
       case 'outline':
         return {
-          stroke: isEvenStroke ? "#999" : "#666",
+          stroke: isEvenStroke ? "#e5e5e5" : "#d3d3d3",
           strokeWidth: "2.5",
           fill: "none"
         };
