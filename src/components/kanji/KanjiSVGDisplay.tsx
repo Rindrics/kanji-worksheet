@@ -172,8 +172,8 @@ export function KanjiSVGDisplay({
               {variant === 'light' && (
                 <path
                   d={createStartPointIndicator(stroke.path)}
-                  stroke={isEvenStroke ? "#aaa" : "#777"}
-                  strokeWidth="3"
+                  stroke={isEvenStroke ? "#b8b8b8" : "#aaa"}
+                  strokeWidth="2"
                   fill="none"
                   strokeLinecap="round"
                   strokeLinejoin="round"
