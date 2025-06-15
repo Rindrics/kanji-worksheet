@@ -51,7 +51,7 @@ body {
 }
 
 .stroke-order-overlay text {
-  font-size: 7px;
+  font-size: 5.6px;
   fill: #000;
   font-weight: 300;
   font-family: Arial, sans-serif;
@@ -154,7 +154,7 @@ body {
 }
 
   .print-mode-enabled .print-mode-view .stroke-order-overlay text {
-    font-size: 8.4pt !important;
+    font-size: 6.7pt !important;
     fill: #000 !important;
     font-weight: 300 !important;
   }
@@ -324,7 +324,7 @@ body {
   }
 
       .stroke-order-overlay text {
-      font-size: 8.4pt !important;
+      font-size: 6.7pt !important;
       fill: #000 !important;
       font-weight: 300 !important;
     }
