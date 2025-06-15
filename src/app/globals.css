@@ -51,9 +51,8 @@ body {
 }
 
 .stroke-order-overlay text {
-  font-size: 10px;
-  fill: #000;
-  font-weight: bold;
+  font-size: 5.6px;
+  font-weight: 300;
   font-family: Arial, sans-serif;
 }
 
@@ -93,12 +92,12 @@ body {
   writing-mode: vertical-rl;
   text-orientation: upright;
   break-inside: avoid;
-  margin-bottom: 15pt;
-  padding: 4pt;
+  margin-bottom: 25pt;
+  padding: 6pt;
   border: 1pt solid #333;
   display: inline-block;
-  width: 80pt;
-  height: 80pt;
+  width: 120pt;
+  height: 120pt;
   background: white !important;
 }
 
@@ -108,7 +107,7 @@ body {
   display: grid !important;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  gap: 2pt;
+  gap: 3pt;
   height: 100%;
   width: 100%;
 }
@@ -154,13 +153,13 @@ body {
 }
 
 .print-mode-enabled .print-mode-view .stroke-order-overlay text {
-  font-size: 7pt !important;
-  fill: #000 !important;
+  font-size: 6.7pt !important;
+  font-weight: 300 !important;
 }
 
 .print-mode-enabled .print-mode-view .stroke-order-overlay path {
   stroke: #000 !important;
-  stroke-width: 0.8pt !important;
+  stroke-width: 1.5pt !important;
 }
 
 .print-mode-enabled .print-mode-view .kanji-card .border {
@@ -230,8 +229,6 @@ body {
     display: none;
   }
 
-
-
   /* グリッドレイアウトの縦書き調整 */
   .grid {
     writing-mode: vertical-rl;
@@ -244,12 +241,12 @@ body {
     writing-mode: vertical-rl;
     text-orientation: upright;
     break-inside: avoid;
-    margin-bottom: 15pt;
-    padding: 4pt;
+    margin-bottom: 25pt;
+    padding: 6pt;
     border: 1pt solid #333;
     display: inline-block;
-    width: 80pt;
-    height: 80pt;
+    width: 120pt;
+    height: 120pt;
     background: white !important;
   }
 
@@ -260,7 +257,7 @@ body {
     display: grid !important;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    gap: 2pt;
+    gap: 3pt;
     height: 100%;
     width: 100%;
   }
@@ -325,13 +322,13 @@ body {
   }
 
   .stroke-order-overlay text {
-    font-size: 7pt !important;
-    fill: #000 !important;
+    font-size: 6.7pt !important;
+    font-weight: 300 !important;
   }
 
   .stroke-order-overlay path {
     stroke: #000 !important;
-    stroke-width: 0.8pt !important;
+    stroke-width: 1.5pt !important;
   }
 
   /* 練習用セクションの枠線 */
@@ -386,5 +383,17 @@ body {
 
   .print-break-inside-avoid {
     page-break-inside: avoid;
+  }
+
+  /* 背景グリッドの線を印刷時に太くする */
+  .kanji-card svg line {
+    stroke: #d0d0d0 !important;
+    stroke-width: 1pt !important;
+    stroke-dasharray: 4,4 !important;
+  }
+
+  /* 印刷時の漢字ストローク幅を80%に調整 */
+  .kanji-card .kanji-svg-container svg path {
+    stroke-width: 4pt !important;
   }
 }

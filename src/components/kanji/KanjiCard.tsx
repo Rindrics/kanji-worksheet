@@ -54,6 +54,14 @@ export function KanjiCard({ kanji }: KanjiCardProps) {
         {/* 右上：空欄（自分で書く用） */}
         <div className="flex items-center justify-center border border-gray-400 relative">
           <BackgroundGrid />
+          {/* なぞり書き用の薄いグレー漢字（書き順番号なし・細いストローク） */}
+          <div className="w-full h-full p-1 relative z-10">
+            <KanjiSVGDisplay
+              kanji={kanji}
+              className="w-full h-full"
+              variant="outline"
+            />
+          </div>
         </div>
 
         {/* 左下：なぞり書き用（書き順付き） */}

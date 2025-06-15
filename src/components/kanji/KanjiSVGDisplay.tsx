@@ -111,30 +111,31 @@ export function KanjiSVGDisplay({
   }
 
   // バリアントに応じてスタイルを決定
-  const getStrokeProps = () => {
+  const getStrokeProps = (strokeNumber: number) => {
+    // 偶数画かどうかを判定
+    const isEvenStroke = strokeNumber % 2 === 0;
+
     switch (variant) {
       case 'light':
         return {
-          stroke: "#d5d5d5",
-          strokeWidth: "5",
+          stroke: isEvenStroke ? "#e5e5e5" : "#d3d3d3",
+          strokeWidth: "4",
           opacity: 1.0
         };
       case 'outline':
         return {
-          stroke: "#666",
+          stroke: isEvenStroke ? "#e5e5e5" : "#d3d3d3",
           strokeWidth: "2.5",
           fill: "none"
         };
       default:
         return {
-          stroke: "#333",
+          stroke: isEvenStroke ? "#333" : "#333",
           strokeWidth: "4.5",
           fill: "none"
         };
     }
   };
-
-  const strokeProps = getStrokeProps();
 
   return (
     <div className={`kanji-svg-container ${className}`}>
@@ -149,33 +150,39 @@ export function KanjiSVGDisplay({
         preserveAspectRatio="xMidYMid meet"
       >
         {/* 漢字のストロークを描画 */}
-        {showStrokes && kanji.strokes.map((stroke, index) => (
-          <g key={index}>
-            {/* メインストローク */}
-            <path
-              d={stroke.path}
-              stroke={strokeProps.stroke}
-              strokeWidth={strokeProps.strokeWidth}
-              fill={strokeProps.fill || "none"}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              opacity={strokeProps.opacity || 1}
-            />
+        {showStrokes && kanji.strokes.map((stroke, index) => {
+          const strokeNumber = index + 1; // 画数は1から始まる
+          const strokeProps = getStrokeProps(strokeNumber);
+          const isEvenStroke = strokeNumber % 2 === 0;
 
-            {/* ストロークの開始点を示す濃い点（lightバリアントのみ） */}
-            {variant === 'light' && (
+          return (
+            <g key={index}>
+              {/* メインストローク */}
               <path
-                d={createStartPointIndicator(stroke.path)}
-                stroke="#777"
-                strokeWidth="3"
-                fill="none"
+                d={stroke.path}
+                stroke={strokeProps.stroke}
+                strokeWidth={strokeProps.strokeWidth}
+                fill={strokeProps.fill || "none"}
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                opacity="0.9"
+                opacity={strokeProps.opacity || 1}
               />
-            )}
-          </g>
-        ))}
+
+              {/* ストロークの開始点を示す濃い点（lightバリアントのみ） */}
+              {variant === 'light' && (
+                <path
+                  d={createStartPointIndicator(stroke.path)}
+                  stroke={isEvenStroke ? "#b8b8b8" : "#aaa"}
+                  strokeWidth="2"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  opacity="0.9"
+                />
+              )}
+            </g>
+          );
+        })}
       </svg>
     </div>
   );

@@ -23,17 +23,23 @@ export function StrokeOrderDisplay({ kanji, className = '' }: StrokeOrderDisplay
         {kanji.strokes.map((stroke) => {
           const x = getStrokeStartX(stroke.path);
           const y = getStrokeStartY(stroke.path);
+          // 偶数画は薄いグレー、奇数画は黒
+          const fillColor = stroke.order % 2 === 0 ? '#999' : '#000';
+          // 奇数番号は少し左上にずらす
+          const isEvenStroke = stroke.order % 2 === 0;
+          const adjustedX = isEvenStroke ? x + 0.5 : x;
+          const adjustedY = isEvenStroke ? y + 0.5 : y;
 
           return (
             <g key={stroke.order}>
-              {/* 書き順番号（黒文字） */}
+              {/* 書き順番号（偶数は薄いグレー、奇数は黒） */}
               <text
-                x={x}
-                y={y}
+                x={adjustedX}
+                y={adjustedY}
                 textAnchor="middle"
                 dominantBaseline="middle"
                 fontSize="10"
-                fill="#000"
+                fill={fillColor}
                 fontWeight="bold"
                 fontFamily="Arial, sans-serif"
               >
