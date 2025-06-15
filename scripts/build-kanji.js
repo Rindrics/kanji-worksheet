@@ -88,7 +88,34 @@ function loadRadicalConfig() {
   return { patterns, radicalInfo };
 }
 
+// 般若心経の漢字データを読み込み
+function loadHannyashingyoKanji() {
+  const hannyashingyoPath = path.join(__dirname, '../src/data/hannyashingyo.ts');
+  const hannyashingyoContent = fs.readFileSync(hannyashingyoPath, 'utf-8');
+
+  // HANNYASHINGYO_TEXTを抽出
+  const textMatch = hannyashingyoContent.match(/HANNYASHINGYO_TEXT\s*=\s*`([\s\S]*?)`/);
+
+  if (!textMatch) {
+    console.warn('⚠️ HANNYASHINGYO_TEXT not found, skipping');
+    return [];
+  }
+
+  const text = textMatch[1].trim();
+
+  // 漢字のみを抽出（ひらがな・カタカナ・数字・記号を除外）
+  const kanjiMatches = text.match(/[\u4e00-\u9faf]/g) || [];
+
+  // 重複を除去してユニークな漢字のセットを作成
+  const uniqueKanji = [...new Set(kanjiMatches)];
+
+  console.log(`📿 Loaded ${uniqueKanji.length} unique kanji from Hannyashingyo`);
+
+  return uniqueKanji;
+}
+
 const { patterns: TARGET_RADICALS, radicalInfo: RADICAL_INFO } = loadRadicalConfig();
+const HANNYASHINGYO_KANJI = loadHannyashingyoKanji();
 
 async function downloadKanjiVG() {
   console.log('📥 Downloading KanjiVG data...');
@@ -262,6 +289,11 @@ function isTargetKanji(character, radicals) {
       console.log(`🚫 Excluding character: ${character} (matched excludeCharacter)`);
       return false;
     }
+  }
+
+  // 般若心経の漢字かチェック
+  if (HANNYASHINGYO_KANJI.includes(character)) {
+    return true;
   }
 
   // 抽出された部首が対象部首のいずれかに含まれるかチェック
