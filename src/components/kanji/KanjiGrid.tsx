@@ -34,16 +34,16 @@ export function KanjiGrid({ kanjiList, title, loading = false }: KanjiGridProps)
           <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
         </div>
       )}
-      
+
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
-        {kanjiList.map(kanji => (
-          <KanjiCard 
-            key={kanji.unicode} 
+        {kanjiList.map((kanji, index) => (
+          <KanjiCard
+            key={`${kanji.unicode}-${index}`}
             kanji={kanji}
           />
         ))}
       </div>
-      
+
       {/* 追加情報 */}
       {kanjiList.length > 0 && (
         <div className="mt-6 p-3 bg-gray-50 rounded-lg print-hide">
